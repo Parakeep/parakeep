@@ -3,6 +3,7 @@ require([
     'app',
     'backbone',
     'jquery',
+    'parse',
 
     // Main Router.
     'router'
@@ -37,5 +38,7 @@ function (app, Backbone, $, Router) {
             Backbone.history.navigate(href, true);
         }
     });
+
+
 
 });

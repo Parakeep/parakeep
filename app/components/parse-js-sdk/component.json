@@ -1,0 +1,14 @@
+{
+  "name": "parse-js-sdk",
+  "version": "1.2.7",
+  "main": "./lib/parse.js",
+  "dependencies": {},
+  "gitHead": "e16857bf6b548c8fda9874cbbc3be48b603d06ee",
+  "_id": "parse-js-sdk@1.2.7",
+  "readme": "ERROR: No README.md file found!",
+  "description": "ERROR: No README.md file found!",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/albemuth/parse-js-sdk.git"
+  }
+}

@@ -12,7 +12,11 @@ require.config({
         // Libraries.
         jquery: '../scripts/libs/jquery',
         lodash: '../scripts/libs/lodash',
-        backbone: '../scripts/libs/backbone'
+        backbone: '../scripts/libs/backbone',
+
+        // PARSE
+        parse: '../components/parse-js-sdk/lib/parse'
+
     },
 
     shim: {
