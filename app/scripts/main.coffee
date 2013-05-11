@@ -3,13 +3,13 @@ require ["app", "backbone", "jquery", "parse", "router"], (app, Backbone, $, par
   # Define your master router on the application namespace and trigger all
   # navigation from this instance.
   app.router = new Router()
-  
+
   # Trigger the initial route and enable HTML5 History API support, set the
   # root folder to '/' by default.  Change in app.js.
   Backbone.history.start
     # pushState: true
     root: app.root
-  
+
   # All navigation that is relative should be passed through the navigate
   # method, to be processed by the router. If the link has a `data-bypass`
   # attribute, bypass the delegation completely.
@@ -24,14 +24,9 @@ require ["app", "backbone", "jquery", "parse", "router"], (app, Backbone, $, par
       # trigger the correct events. The Router's internal `navigate` method
       # calls this anyways.  The fragment is sliced from the root.
       Backbone.history.navigate href, true
-  
+
   #GO GO GADGET PARSE
   Parse.initialize "ratnJMKXEJoVfL7OJoFfdeNOeepJd0oQ6Wz0MsF7", "rXWu04kUDnOpQT1vFxH5MeveLsGOd3sqysVOiTMa"
-  TestObject = Parse.Object.extend("TestObject")
-  testObject = new TestObject()
-  testObject.save foo: "bar",
-    success: (object) ->
-      console.log "yay! it worked"
 
   $('#venueSearch').on 'submit', (evt) ->
     evt.preventDefault()
