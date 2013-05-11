@@ -31,16 +31,22 @@ require ["app", "backbone", "jquery", "parse", "router"], (app, Backbone, $, par
   $('#venueSearch').on 'submit', (evt) ->
     evt.preventDefault()
     console.log 'venue searching...'
+    $('#loading').removeClass 'hide'
 
     Parse.Cloud.run 'venueSearch', { query: $('#term').val(), near: $('#near').val() },
       success: (response) ->
+        $('#loading').addClass 'hide'
         list = $('#list').html('')
         items = JSON.parse(response).response.groups[0].items
         if items.length
           list.append(JST.business item) for item in items
         else
-          list.append JST.error 
+          list.html JST.error 
             message: "No results found"
             icon: 'remove'
       error: (error) ->
+        $('#loading').addClass 'hide'
         console.error error
+        $('#list').html JST.error
+          message: error
+          icon: 'remove'
