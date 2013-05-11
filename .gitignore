@@ -1,5 +1,6 @@
 temp
 dist
+.tmp
 .sass-cache
 .DS_store
 npm-debug.log
