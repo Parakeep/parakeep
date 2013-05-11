@@ -1,2 +1,8 @@
 temp
 dist
+.sass-cache
+.DS_store
+npm-debug.log
+node_modules
+components
+packages
