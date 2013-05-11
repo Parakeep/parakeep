@@ -9,7 +9,7 @@ require([
     'router'
 ],
 
-function (app, Backbone, $, Router) {
+function (app, Backbone, $, parse, Router) {
     'use strict';
     // Define your master router on the application namespace and trigger all
     // navigation from this instance.
@@ -36,6 +36,17 @@ function (app, Backbone, $, Router) {
             // trigger the correct events. The Router's internal `navigate` method
             // calls this anyways.  The fragment is sliced from the root.
             Backbone.history.navigate(href, true);
+        }
+    });
+
+    //GO GO GADGET PARSE
+    Parse.initialize("GUyWWlIBRFetye705B98iJKYVHJN7ECrR6UJc7h6", "sngjSxV0QF9Tt2lndLVtsNobk332VAAVVu3LENNW");
+
+    var TestObject = Parse.Object.extend("TestObject");
+    var testObject = new TestObject();
+    testObject.save({foo: "bar"}, {
+        success: function(object) {
+        alert("yay! it worked");
         }
     });
 
