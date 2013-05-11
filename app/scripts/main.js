@@ -42,14 +42,4 @@ function (app, Backbone, $, parse, Router) {
     //GO GO GADGET PARSE
     Parse.initialize("GUyWWlIBRFetye705B98iJKYVHJN7ECrR6UJc7h6", "sngjSxV0QF9Tt2lndLVtsNobk332VAAVVu3LENNW");
 
-    var TestObject = Parse.Object.extend("TestObject");
-    var testObject = new TestObject();
-    testObject.save({foo: "bar"}, {
-        success: function(object) {
-        alert("yay! it worked");
-        }
-    });
-
-
-
 });
