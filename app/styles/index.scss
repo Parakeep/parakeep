@@ -1,4 +1,23 @@
 /* remember to remove line 30: @import "sprites"; from bootstrap */
 @import "../components/bootstrap-sass/lib/bootstrap";
 
-@import "../components/font-awesome/build/assets/font-awesome/css/font-awesome.css"
+@import "../components/font-awesome/build/assets/font-awesome/css/font-awesome.css";
+
+#venueSearch {
+	padding: 10px 20px;
+	input, button {
+		font-size: 18px;
+		height: 40px;
+		box-sizing: border-box;
+	}
+	#term { width: 200px; }
+	#near { width: 120px; }
+}
+
+.business {
+	background: #eee;
+	border-radius: 6px;
+	padding: 10px;
+	margin: 10px;
+	width: 200px;
+}

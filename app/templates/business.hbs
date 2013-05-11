@@ -1,5 +1,8 @@
-<div class="business">
-	<h4 class="name"><img src="{{img}}"> {{name}}</h4>
-	<span class="address">{{address}}</span>
-	<span class="phone">{{phone}}</span>
-</div>
+<li class="business">
+	<a href="{{url}}"><h4 class="name">{{name}}</h4></a>
+	{{#with location}}
+	<div class="address">{{address}}<br/>{{city}}, {{cc}} {{postalCode}}</div>
+	{{/with}}
+	<div class="phone"><a href="tel:{{contact.phone}}">{{contact.formattedPhone}}</a></div>
+	<em> {{#each categories}}<img src="{{icon}}"> {{shortName}}{{/each}} </em>
+</li>
