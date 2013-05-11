@@ -21,6 +21,7 @@ module.exports = function (grunt) {
     };
 
     grunt.loadNpmTasks('grunt-contrib-handlebars');
+    grunt.loadNpmTasks('grunt-bower-task');
 
 
     grunt.initConfig({
@@ -163,7 +164,7 @@ module.exports = function (grunt) {
                 },
                 options: {
                     namespace: 'JST',
-                    wrapped: true, 
+                    wrapped: true,
                     processName: function(filename) {
                     // funky name processing here
                     return filename
@@ -183,13 +184,22 @@ module.exports = function (grunt) {
                 // Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js
                 options: {
                     // `name` and `out` is set by grunt-usemin
-                    baseUrl: 'app/scripts',
+                    baseUrl: '.tmp/scripts',
                     optimize: 'none',
                     // TODO: Figure out how to make sourcemaps work with grunt-usemin
                     // https://github.com/yeoman/grunt-usemin/issues/30
                     //generateSourceMaps: true,
                     // required to support SourceMaps
                     // http://requirejs.org/docs/errors.html#sourcemapcomments
+                    paths: {
+                        "jquery": "../../app/components/jquery/jquery.min",
+                        "lodash": "../../app/scripts/libs/lodash",
+                        "backbone": "../../app/scripts/libs/backbone",
+                        "plugins": "../../app/scripts/plugins",
+                        "parse": "../../app/components/parse-js-sdk/lib/parse"
+                    },
+
+
                     preserveLicenseComments: false,
                     useStrict: true,
                     wrap: true,
