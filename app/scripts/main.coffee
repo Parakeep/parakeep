@@ -31,4 +31,13 @@ require ["app", "backbone", "jquery", "parse", "router"], (app, Backbone, $, par
   testObject = new TestObject()
   testObject.save foo: "bar",
     success: (object) ->
-      alert "yay! it worked"
+      console.log "yay! it worked"
+
+  $('#venueSearch').on 'submit', (evt) ->
+    evt.preventDefault()
+
+    Parse.Cloud.run 'venueSearch', { query: $('#term').val(), near: $('#near').val() },
+      success: (response) ->
+        console.log JSON.parse(response).response.groups[0].items
+      error: (error) ->
+        console.error error

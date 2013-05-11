@@ -20,6 +20,9 @@ module.exports = function (grunt) {
         dist: 'dist'
     };
 
+    grunt.loadNpmTasks('grunt-contrib-handlebars');
+
+
     grunt.initConfig({
         yeoman: yeomanConfig,
         watch: {
@@ -34,6 +37,10 @@ module.exports = function (grunt) {
             compass: {
                 files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
                 tasks: ['compass']
+            },
+            handlebars: {
+                files: ['<%= yeoman.app %>/templates/**/*.hbs'],
+                tasks: ['handlebars']
             },
             livereload: {
                 files: [
@@ -149,6 +156,23 @@ module.exports = function (grunt) {
                 }
             }
         },
+        handlebars: {
+            compile: {
+                files: {
+                    ".tmp/scripts/compiled-templates.js": ["app/templates/**/*.hbs"]
+                },
+                options: {
+                    namespace: 'JST',
+                    wrapped: true, 
+                    processName: function(filename) {
+                    // funky name processing here
+                    return filename
+                            .replace(/^app\/templates\//, '')
+                            .replace(/\.hbs$/, '');
+                    }
+                }
+            }
+        },
         // not used since Uglify task does concat,
         // but still available if needed
         /*concat: {
@@ -258,6 +282,7 @@ module.exports = function (grunt) {
 
         grunt.task.run([
             'clean:server',
+            'handlebars',
             'coffee:dist',
             'compass:server',
             'livereload-start',
@@ -277,6 +302,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', [
         'clean:dist',
+        'handlebars',
         'coffee',
         'compass:dist',
         'useminPrepare',

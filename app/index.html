@@ -14,20 +14,11 @@
     <body>
         <!-- Main container. -->
         <div role="main" id="main" class="container">
-            <div class="hero-unit">
-                <h1><i class="icon-time icon-2x"></i> 'Allo, 'Allo!</h1>
-                <p>You now have</p>
-                <ul>
-                    <li>HTML5 Boilerplate</li>
-                    <li>jQuery</li>
-                    <li>Backbone.js</li>
-                    <li>Backbone LayoutManager</li>
-                    <li>RequireJS</li>
-                    <li>Mocha</li>
-                </ul>
-                <p>installed.</p>
-                <h3>Enjoy coding! - Yeoman</h3>
-            </div>
+            <form class="form-inline input-prepend input-append" id="venueSearch">
+                <input type="text" id="term" placeholder="search term" class="" value="pizza">
+                <input type="text" id="near" placeholder="near" class="input-small" value="Seattle">
+                <button type="submit" class="btn">search</button>
+            </form>
         </div>
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
@@ -36,6 +27,11 @@
         <!-- Add your site or application content here -->
 
         <!-- build:js scripts/amd-app.js -->
+        <script src="components/jquery/jquery.js"></script>
+        <script src="scripts/libs/lodash.js"></script>
+        <script src="scripts/libs/backbone.js"></script>
+        <script src="components/handlebars/handlebars.runtime.js"></script>
+        <script src="scripts/compiled-templates.js"></script>
         <script data-main="scripts/config" src="scripts/libs/require.js"></script>
         <!-- endbuild -->
 
