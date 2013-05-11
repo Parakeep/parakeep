@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "Parakeep": {
+            "applicationId": "ratnJMKXEJoVfL7OJoFfdeNOeepJd0oQ6Wz0MsF7", 
+            "masterKey": "RaGCPpWqbvNiZGHkWbUZyDjyjbjGoVluDkzTQfmR"
+        }, 
+        "_default": {
+            "link": "Parakeep"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.2.7"
+    }
+}
