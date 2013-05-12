@@ -1,8 +1,14 @@
 /* remember to remove line 30: @import "sprites"; from bootstrap */
+
+$navbarHeight: 60px;
+$navbarBackground: #0f9f6f;
+$navbarBackgroundHighlight: #42b879;
+
 @import "../components/bootstrap-sass/lib/bootstrap";
 
 @import "../components/font-awesome/build/assets/font-awesome/css/font-awesome.css";
 
+@import "navbar";
 #venueSearch {
 	padding: 10px 20px;
 

@@ -1,5 +1,6 @@
 
 Parse.Cloud.define("venueSearch", function(request, response) {
+	// Foursquare API client ID and secret
 	client = "POEOWI3KJ50IOFSY3404RKLQEBEG2TF4G4WOKXJGPRCJGKIK"
 	secret = "OEC3JBPOEL22M0KTZLCJ3IBM2AL5BZQUPCDLDUJGYZC3I2J4"
 
