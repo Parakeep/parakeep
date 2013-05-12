@@ -1,4 +1,4 @@
-require ["app", "backbone", "jquery", "parse", "router"], (app, Backbone, $, parse, Router) ->
+define ["app", "backbone", "jquery", "parse", "router"], (app, Backbone, $, parse, Router) ->
   "use strict"
   # Define your master router on the application namespace and trigger all
   # navigation from this instance.
@@ -33,11 +33,11 @@ require ["app", "backbone", "jquery", "parse", "router"], (app, Backbone, $, par
   $('#search').on 'submit', (evt) ->
     evt.preventDefault()
     # show loading spinner
-    $('#loading').removeClass 'hide'
+    $('#submit').addClass 'load'
     # fire off Parse Cloud request
     Parse.Cloud.run 'venueSearch', { query: $('#query').val(), near: $('#near').val() },
       success: (response) ->
-        $('#loading').addClass 'hide'
+        $('#submit').removeClass 'load'
         list = $('#list').html('')
         items = JSON.parse(response).response.groups[0].items
         if items.length

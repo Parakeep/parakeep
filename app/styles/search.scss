@@ -1,42 +1,42 @@
+
 $iconWidth: 24px;
 $inputHeight: 40px;
 $buttonsWidth: 80px;
 $borderColor: rgb(209,211,212);
 
+// wrapper around entire form that fills screen with background color bar
 header {
 	background: rgb(230,231,232);
 	border-bottom: 1px solid $borderColor;
 }
 
 #search {
-	max-width: 500px;
+	// centered with just a max width makes it auto-responsive
 	margin: auto;
+	max-width: 500px;
 	padding: 20px;
 
-	> div { 
-		display: table-row; 
-		> * { display: table-cell; }
-		> *:first-child { width: 100%; }
-		> *:last-child { width: $buttonsWidth; }
-		&:first-child > * { padding-bottom: 10px; }
-	}
+	//put a grid of table rows with one fixed width column 
+	@include table-row-grid($buttonsWidth, 10px);
+	// btns evenly split width of fixed cell
+	.btn-group .btn { width: 50%; }
 	
+	// invisible wrapper around text field to place icon on input
 	.wrapper { 
 		position: relative; 
 		display: table-cell;
 		padding-right: 10px;
-
+		// icon is absolute-positioned on left side of text input
 		i {
 			position: absolute;
 			top: 7px;
 			left: 8px;
 			font-size: $iconWidth;
-			// margin-top: -$iconWidth * 3 / 4;
 			width: $iconWidth;
 			text-align: center;
 			color: $borderColor;
 		}
-
+		// text input fills entire wrapper with wide padding for icon
 		input { 
 			width: 100%;
 			margin: 0; 
@@ -45,19 +45,19 @@ header {
 		}
 	}
 
+	// bigger, badder buttons and inputs
 	input, button {
 		font-size: 20px;
 		height: $inputHeight;
 		padding: 0;
 	}
 
-	.btn-group .btn { width: 50%; }
 
-	#query {
-
-	}
-
-	#near {
-
+	// show loading spinner when 'load' class is added to #submit
+	.loading { font-size: 1.5em; display: none; }
+	.load {
+		@extend .disabled;	// also disabled button appearance
+		.loading { display: inline-block; }
+		:not(.loading) { display: none; }
 	}
 }
