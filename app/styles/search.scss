@@ -1,0 +1,63 @@
+$iconWidth: 24px;
+$inputHeight: 40px;
+$buttonsWidth: 80px;
+$borderColor: rgb(209,211,212);
+
+header {
+	background: rgb(230,231,232);
+	border-bottom: 1px solid $borderColor;
+}
+
+#search {
+	max-width: 500px;
+	margin: auto;
+	padding: 20px;
+
+	> div { 
+		display: table-row; 
+		> * { display: table-cell; }
+		> *:first-child { width: 100%; }
+		> *:last-child { width: $buttonsWidth; }
+		&:first-child > * { padding-bottom: 10px; }
+	}
+	
+	.wrapper { 
+		position: relative; 
+		display: table-cell;
+		padding-right: 10px;
+
+		i {
+			position: absolute;
+			top: 7px;
+			left: 8px;
+			font-size: $iconWidth;
+			// margin-top: -$iconWidth * 3 / 4;
+			width: $iconWidth;
+			text-align: center;
+			color: $borderColor;
+		}
+
+		input { 
+			width: 100%;
+			margin: 0; 
+			padding-left: $inputHeight;
+			box-sizing: border-box;
+		}
+	}
+
+	input, button {
+		font-size: 20px;
+		height: $inputHeight;
+		padding: 0;
+	}
+
+	.btn-group .btn { width: 50%; }
+
+	#query {
+
+	}
+
+	#near {
+
+	}
+}

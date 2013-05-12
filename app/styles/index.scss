@@ -9,6 +9,12 @@ $navbarBackgroundHighlight: #42b879;
 @import "../components/font-awesome/build/assets/font-awesome/css/font-awesome.css";
 
 @import "navbar";
+@import "search";
+
+.container-fluid {
+	padding: 0 !important;
+}
+
 #venueSearch {
 	padding: 10px 20px;
 

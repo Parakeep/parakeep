@@ -28,12 +28,14 @@ require ["app", "backbone", "jquery", "parse", "router"], (app, Backbone, $, par
   #GO GO GADGET PARSE
   Parse.initialize "ratnJMKXEJoVfL7OJoFfdeNOeepJd0oQ6Wz0MsF7", "rXWu04kUDnOpQT1vFxH5MeveLsGOd3sqysVOiTMa"
 
-  $('#venueSearch').on 'submit', (evt) ->
-    evt.preventDefault()
-    console.log 'venue searching...'
-    $('#loading').removeClass 'hide'
+  $('header').html(JST.search())
 
-    Parse.Cloud.run 'venueSearch', { query: $('#term').val(), near: $('#near').val() },
+  $('#search').on 'submit', (evt) ->
+    evt.preventDefault()
+    # show loading spinner
+    $('#loading').removeClass 'hide'
+    # fire off Parse Cloud request
+    Parse.Cloud.run 'venueSearch', { query: $('#query').val(), near: $('#near').val() },
       success: (response) ->
         $('#loading').addClass 'hide'
         list = $('#list').html('')
@@ -48,5 +50,5 @@ require ["app", "backbone", "jquery", "parse", "router"], (app, Backbone, $, par
         $('#loading').addClass 'hide'
         console.error error
         $('#list').html JST.error
-          message: error
+          message: error.message
           icon: 'remove'
