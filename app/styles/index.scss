@@ -10,6 +10,11 @@ $navbarBackgroundHighlight: #42b879;
 
 @import "navbar";
 @import "search";
+@import "business";
+
+body {
+	background: rgb(241,242,242);		
+}
 
 .container-fluid {
 	padding: 0 !important;
@@ -26,17 +31,4 @@ $navbarBackgroundHighlight: #42b879;
 
 	#term { width: 200px; }
 	#near { width: 120px; }
-}
-
-.business {
-	background: #eee;
-	border-radius: 6px;
-	padding: 10px !important;
-	margin: 10px;
-	width: 200px;
-	vertical-align: top;
-
-	.name {
-		margin-top: 0;
-	}
 }

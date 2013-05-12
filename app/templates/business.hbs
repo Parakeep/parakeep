@@ -1,13 +1,13 @@
 <li class="business">
-	<h4 class="name">
-		<span class="pull-right icons">
+	<h3 class="name">
+		<span class="icons">
 			{{#each categories}}<img src="{{icon}}" alt="{{name}}" title="{{name}}">{{/each}}
 		</span>
 		{{#if url}}<a href="{{url}}">{{name}}</a>
 		{{else}}{{name}}{{/if}}
-	</h4>
+	</h3>
 	{{#with location}}{{#if city}}
-	<div class="address">{{address}}<br/>{{city}}, {{cc}} {{postalCode}}</div>
+	<div class="address line1">{{address}}</div><div class="address line2">{{city}}, {{#if state}}{{state}}, {{/if}}{{cc}} {{postalCode}}</div>
 	{{/if}}{{/with}}
 	<div class="phone"><a href="tel:{{contact.phone}}">{{contact.formattedPhone}}</a></div>
 </li>
