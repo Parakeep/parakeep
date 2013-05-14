@@ -1,4 +1,4 @@
-define ["app", "backbone", "jquery", "parse", "router"], (app, Backbone, $, parse, Router) ->
+define ["app", 'parse', "router"], (app, Parse, Router) ->
   "use strict"
   # Define your master router on the application namespace and trigger all
   # navigation from this instance.
@@ -6,7 +6,7 @@ define ["app", "backbone", "jquery", "parse", "router"], (app, Backbone, $, pars
 
   # Trigger the initial route and enable HTML5 History API support, set the
   # root folder to '/' by default.  Change in app.js.
-  Backbone.history.start
+  Parse.history.start
     # pushState: true
     root: app.root
 
@@ -23,7 +23,7 @@ define ["app", "backbone", "jquery", "parse", "router"], (app, Backbone, $, pars
       # `Backbone.history.navigate` is sufficient for all Routers and will
       # trigger the correct events. The Router's internal `navigate` method
       # calls this anyways.  The fragment is sliced from the root.
-      Backbone.history.navigate href, true
+      Parse.history.navigate href, true
 
   #GO GO GADGET PARSE
   Parse.initialize "ratnJMKXEJoVfL7OJoFfdeNOeepJd0oQ6Wz0MsF7", "rXWu04kUDnOpQT1vFxH5MeveLsGOd3sqysVOiTMa"

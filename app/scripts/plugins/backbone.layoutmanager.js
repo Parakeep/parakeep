@@ -11,7 +11,7 @@
 var keys;
 
 // Alias the libraries from the global object.
-var Backbone = window.Backbone;
+var Backbone = window.Backbone || window.Parse;
 var _ = window._;
 var $ = window.$;
 

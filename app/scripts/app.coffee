@@ -1,4 +1,5 @@
-define ["jquery", "lodash", "backbone", "plugins/backbone.layoutmanager"], ($, _, Backbone) ->
+# all the top-level dependencies go here. simply requiring 'app' will give you all these libraries.
+define ["jquery", "lodash", "parse", "plugins/backbone.layoutmanager"], ($, _, Parse) ->
   "use strict"
   
   # Provide a global location to place configuration settings and module creation.
@@ -8,23 +9,20 @@ define ["jquery", "lodash", "backbone", "plugins/backbone.layoutmanager"], ($, _
   JST = window.JST = window.JST or {}
   
   # Configure LayoutManager with Backbone Boilerplate defaults.
-  Backbone.LayoutManager.configure
+  Parse.LayoutManager.configure
+    manage: true
+    
     paths:
-      layout: "templates/layouts/"
-      template: "templates/"
+      layout: 'layouts/'
 
     fetch: (path) ->
-      path = path + ".html"
-      unless JST[path]
-        $.ajax(
-          url: app.root + path
-          async: false
-        ).then (contents) ->
-          JST[path] = _.template(contents)
+      # Handlebars pre-compiled templates make this about as easy as possible.
+      # either the template exists and is ready to rock, or it doesn't and never will.
+      console.error "unknown template '#{path}'" unless JST[path]
       JST[path]
   
   # Mix Backbone.Events, modules, and layout management into the app object.
-  _.extend app, Backbone.Events,
+  _.extend app, Parse.Events,
     
     # Create a custom object with a nested Views object.
     module: (additionalProps) ->
@@ -37,7 +35,7 @@ define ["jquery", "lodash", "backbone", "plugins/backbone.layoutmanager"], ($, _
       # If a layout already exists, remove it from the DOM.
       @layout.remove()  if @layout
       # Create a new Layout.
-      layout = new Backbone.Layout
+      layout = new Parse.Layout
         template: name
         className: "layout " + name
         id: "layout"

@@ -2,6 +2,7 @@
 require.config
   # Initialize the application with the main application file.
   deps: ["main"]
+
   paths:
     # JavaScript folders.
     libs: "../scripts/libs"
@@ -14,10 +15,11 @@ require.config
     parse: "../components/parse-js-sdk/lib/parse"
 
   shim:
-    # Backbone library depends on lodash and jQuery.
-    backbone:
+    # Parse library depends on lodash and jQuery, just like Backbone.
+    parse:
       deps: ["lodash", "jquery"]
-      exports: "Backbone"
-    # Backbone.LayoutManager depends on Backbone.
-    "plugins/backbone.layoutmanager": ["backbone"]
+      exports: "Parse"
+    
+    # Backbone.LayoutManager depends on Parse now!
+    "plugins/backbone.layoutmanager": ["parse"]
 
