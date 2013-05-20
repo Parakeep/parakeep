@@ -165,6 +165,8 @@ module.exports = function (grunt) {
                 options: {
                     namespace: 'JST',
                     wrapped: true,
+                    partialRegex: /.*/,
+                    partialsPathRegex: /partials\//,
                     processName: function(filename) {
                         // funky name processing here
                         return filename

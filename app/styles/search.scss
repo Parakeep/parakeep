@@ -19,7 +19,9 @@ $borderColor: rgb(209,211,212);
 		padding: 20px;
 
 		//put a grid of table rows with one fixed width column 
-		@include table-row-grid(10px, 0, $buttonsWidth);
+		&:not(.one-line) {
+			@include table-row-grid(10px, 0, $buttonsWidth);
+		}
 		// btns evenly split width of fixed cell
 		.btn-group .btn { width: 50%; }
 		

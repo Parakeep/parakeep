@@ -7,7 +7,7 @@ define ['models/listen', 'views/item', 'views/search'], (Listen, ItemView, Searc
 	class ListView extends Parse.View
 		template: 'list'
 		itemTemplate: 'items/business'
-		itemClassName: 'item'
+		itemClassName: 'business item'
 
 		initialize: ->
 			# cache selectors

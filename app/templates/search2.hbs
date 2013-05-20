@@ -1,10 +1,20 @@
-<form id="search">
-	<span class="query wrapper">
-		<i class="icon-search"></i>
-		<input type="text" id="query" placeholder="businesses or vendors" value="" autocomplete="off">
-	</span>
-	<span class="near wrapper">
-		<i class="icon-map-marker"></i>
-		<input type="text" id="near" placeholder="search location" value="seattle">
-	</span>
-</form>
+<div class="btn-group list-actions">
+	<button id="create" class="btn btn-success" data-toggle="modal" data-target="#addModal" data-bypass><i class="icon-plus"></i></a>
+	<button id="edit" class="btn btn-success"><i class="icon-pencil"></i></button>
+</div>
+<div id="addModal" class="modal hide fade">
+	<form id="search" class="search-modal">
+		<span class="query wrapper">
+			<i class="icon-search"></i>
+			<input type="text" id="query" placeholder="businesses or vendors" value="" autocomplete="off" autofocus>
+		</span>
+		<span class="near wrapper">
+			<i class="icon-map-marker"></i>
+			<input type="text" id="near" placeholder="search location" value="{{near}}">
+		</span>
+		<div id="data"></div>
+		<div class="actions">
+			<button type="submit" class="btn btn-success btn-block">Add to List</button>
+		</div>
+	</form>
+</div>

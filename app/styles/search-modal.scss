@@ -1,0 +1,106 @@
+$maxFormWidth: 600px;
+
+$iconWidth: 24px;
+$inputHeight: 40px;
+$buttonsWidth: 80px;
+$borderColor: rgb(209,211,212);
+
+
+#search {
+	margin: 0;
+
+	.list-actions {
+		position: fixed;
+		bottom: 15px;
+		right: 15px;
+		button {
+			padding: 0;
+			width: 50px;
+			height: 50px;
+			font-size: 30px;
+			line-height: 50px;
+
+			&#create {
+				width: 100px;
+			}
+		}
+	}
+
+	.wrapper { 
+		position: relative; 
+		display: inline-block;
+		// icon is absolute-positioned on left side of text input
+		i {
+			position: absolute;
+			top: 7px;
+			left: 8px;
+			font-size: $iconWidth;
+			width: $iconWidth;
+			text-align: center;
+			color: $borderColor;
+		}
+		// text input fills entire wrapper with wide padding for icon
+		input { 
+			width: 100%;
+			margin: 0; 
+			padding-left: $inputHeight;
+			box-sizing: border-box;
+		}
+	}
+
+	// bigger, badder buttons and inputs
+	input, button {
+		font-size: 20px;
+		height: $inputHeight;
+		// padding: 0;
+	}
+
+	textarea {
+		width: 100%;
+		box-sizing: border-box;
+		border-radius: 0;
+		height: 50px;
+	}
+
+	.typeahead {
+		top: 80px !important;
+		left: 0;
+		right: 0;
+		height: 135px;
+		overflow-x: hidden;
+		overflow-y: scroll;
+	}
+
+	#data {
+		height: 130px;
+		text-align: center;
+	}
+
+	@media (min-width: $maxFormWidth + 1) {
+		.query {
+			width: 60%;
+			float: left;
+
+			input { border-radius: 6px 0 0 6px; }
+		}
+		.near {
+			width: 40%;
+			float: left;
+
+			input {
+				border-left: none;
+				border-radius: 0 6px 6px 0;
+			}
+		}
+	}
+	@media (max-width: $maxFormWidth) {
+		.wrapper { width: 100%; }
+		.query input {
+			border-radius: 6px 6px 0 0;
+		}
+		.near input {
+			border-top: none;
+			border-radius: 0 0 6px 6px;
+		}
+	}
+}

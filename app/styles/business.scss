@@ -1,4 +1,5 @@
 .business {
+	text-align: left;
 
 	.name {
 		margin-top: 0;
@@ -29,9 +30,9 @@
 		width: 200px;
 		vertical-align: top;
 
-		.icons {
-			float: right;
-		}
+	}
+	.icons {
+		float: right;
 	}
 }
 

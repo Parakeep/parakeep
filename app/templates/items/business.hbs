@@ -1,5 +1,4 @@
 {{#with data}}
-<li class="business">
 	{{#first categories}}<img class="icons" src="{{icon.prefix}}44{{icon.suffix}}" alt="{{name}}" title="{{name}}">{{/first}}
 	<h3 class="name">
 		{{#if url}}<a href="{{url}}" target="_blankß">{{name}}</a>
@@ -9,5 +8,4 @@
 	<div class="address line1">{{address}}</div><div class="address line2">{{city}}, {{#if state}}{{state}}, {{/if}}{{cc}} {{postalCode}}</div>
 	{{/if}}{{/with}}
 	<div class="phone"><a href="tel:{{contact.phone}}">{{contact.formattedPhone}}</a></div>
-</li>
 {{/with}}

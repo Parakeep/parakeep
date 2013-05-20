@@ -57,17 +57,14 @@ define ['app'], (app) ->
 
 
 	# collection of items in a list (contained within List?)
-	Listen.ItemCollection = Parse.Collection.extend
+	class Listen.ItemCollection extends Parse.Collection
 		model: Listen.Item
 
-		addFromSource: (source, data) ->
-			model = new Listen.Item
+		# override Collection.create to inject list and order fields
+		create: (options) ->
+			super _.extend options, 
 				list: @list
-				source: source
-				data: data
 				order: @nextOrder()
-			@add model
-			model
 
 		# We keep the ListItems in sequential order, despite being saved by unordered
 		# GUID in the database. This generates the next order number for new items.

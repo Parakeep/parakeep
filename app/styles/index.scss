@@ -8,12 +8,14 @@ $navbarBackgroundHighlight: #42b879;
 
 @import "font-awesome.css";
 
+$mobileWidth: 500px;
+
 // utility files
 @import "mixins";
 
 // individual template files
 @import "navbar";
-@import "search";
+@import "search-modal";
 @import "business";
 @import "list";
 
@@ -36,4 +38,14 @@ body {
 
 	#term { width: 200px; }
 	#near { width: 120px; }
+}
+
+.modal {
+	padding: 10px;
+	@media (max-width: $mobileWidth) {
+		width: auto;
+		left: 10%;
+		right: 10%;
+		margin: 0;
+	}
 }
