@@ -1,5 +1,5 @@
 # all the top-level dependencies go here. simply requiring 'app' will give you all these libraries.
-define ["jquery", "lodash", "parse", "plugins/backbone.layoutmanager"], ($, _, Parse) ->
+define ["plugins/backbone.layoutmanager"], () ->
   "use strict"
   
   # Provide a global location to place configuration settings and module creation.

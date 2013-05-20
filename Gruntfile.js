@@ -160,16 +160,16 @@ module.exports = function (grunt) {
         handlebars: {
             compile: {
                 files: {
-                    ".tmp/scripts/compiled-templates.js": ["app/templates/**/*.hbs"]
+                    "<%= yeoman.app %>/scripts/compiled-templates.js": ["<%= yeoman.app %>/templates/**/*.hbs"]
                 },
                 options: {
                     namespace: 'JST',
                     wrapped: true,
                     processName: function(filename) {
-                    // funky name processing here
-                    return filename
-                            .replace(/^app\/templates\//, '')
-                            .replace(/\.hbs$/, '');
+                        // funky name processing here
+                        return filename
+                                .replace(/^app\/templates\//, '')
+                                .replace(/\.hbs$/, '');
                     }
                 }
             }
@@ -192,9 +192,7 @@ module.exports = function (grunt) {
                     // required to support SourceMaps
                     // http://requirejs.org/docs/errors.html#sourcemapcomments
                     paths: {
-                        "jquery": "../../app/components/jquery/jquery.min",
-                        "lodash": "../../app/scripts/libs/lodash",
-                        "backbone": "../../app/scripts/libs/backbone",
+                        "bootstrap": "../../app/components/bootstrap-sass/js",
                         "plugins": "../../app/scripts/plugins",
                         "parse": "../../app/components/parse-js-sdk/lib/parse"
                     },
@@ -271,7 +269,8 @@ module.exports = function (grunt) {
                     src: [
                         '*.{ico,txt}',
                         '.htaccess',
-                        'images/{,*/}*.{webp,gif}'
+                        'images/{,*/}*.{webp,gif}',
+                        'styles/fonts/*'
                     ]
                 }]
             }
@@ -304,6 +303,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('test', [
         'clean:server',
+        'handlebars',
         'coffee',
         'compass',
         'connect:test',

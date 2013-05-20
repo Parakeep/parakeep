@@ -7,17 +7,12 @@ require.config
     # JavaScript folders.
     libs: "../scripts/libs"
     plugins: "../scripts/plugins"
-    # Libraries.
-    jquery: "../scripts/libs/jquery"
-    lodash: "../scripts/libs/lodash"
-    backbone: "../scripts/libs/backbone"
-    # PARSE
+    # Libraries
+    bootstrap: "../components/bootstrap-sass/js"
     parse: "../components/parse-js-sdk/lib/parse"
 
   shim:
-    # Parse library depends on lodash and jQuery, just like Backbone.
     parse:
-      deps: ["lodash", "jquery"]
       exports: "Parse"
     
     # Backbone.LayoutManager depends on Parse now!

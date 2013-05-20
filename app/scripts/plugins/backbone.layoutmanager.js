@@ -12,7 +12,7 @@ var keys;
 
 // Alias the libraries from the global object.
 var Backbone = window.Backbone || window.Parse;
-var _ = window._;
+var _ = window._ || window.Parse._;
 var $ = window.$;
 
 // Store references to original View functions.
