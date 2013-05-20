@@ -6,7 +6,7 @@ $navbarBackgroundHighlight: #42b879;
 /* remember to remove line 30: @import "sprites"; from bootstrap.scss */
 @import "../components/bootstrap-sass/lib/bootstrap";
 
-@import "../components/font-awesome/build/assets/font-awesome/css/font-awesome.css";
+@import "font-awesome.css";
 
 // utility files
 @import "mixins";
