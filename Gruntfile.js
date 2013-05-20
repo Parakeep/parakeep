@@ -145,6 +145,8 @@ module.exports = function (grunt) {
             options: {
                 cssDir: '.tmp/styles',
                 sassDir: '<%= yeoman.app %>/styles',
+                // we don't want to compile the whole directory, use @imports from root file instead
+                specify: '<%= yeoman.app %>/styles/index.scss',
                 imagesDir: '<%= yeoman.app %>/images',
                 javascriptsDir: '.tmp/scripts',
                 relativeAssets: true,
