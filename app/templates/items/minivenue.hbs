@@ -1,0 +1,9 @@
+<div class="minivenue">
+	{{#first categories}}<img class="icon" src="{{icon.prefix}}44{{icon.suffix}}">{{/first}}
+	<span class="name">{{name}}</span>
+	{{#with location}}{{#if city}}
+	<span class="address">
+		{{#if address}}{{address}}, {{/if}}{{city}}, {{#if state}}{{state}}, {{/if}}{{cc}} {{postalCode}}&nbsp;
+	</span>
+	{{/if}}{{/with}}
+</div>

@@ -34,3 +34,17 @@
 		}
 	}
 }
+
+.minivenue {
+	.icon { 
+		float: right; 
+		margin-top: -2px;
+	}
+	.name {
+		font-weight: bold;
+		display: block;
+	}
+	.address {
+		color: #aaa;
+	}
+}

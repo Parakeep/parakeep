@@ -1,8 +1,7 @@
+{{#with data}}
 <li class="business">
+	{{#first categories}}<img class="icons" src="{{icon.prefix}}44{{icon.suffix}}" alt="{{name}}" title="{{name}}">{{/first}}
 	<h3 class="name">
-		<span class="icons">
-			{{#each categories}}<img src="{{icon}}" alt="{{name}}" title="{{name}}">{{/each}}
-		</span>
 		{{#if url}}<a href="{{url}}" target="_blankß">{{name}}</a>
 		{{else}}{{name}}{{/if}}
 	</h3>
@@ -11,3 +10,4 @@
 	{{/if}}{{/with}}
 	<div class="phone"><a href="tel:{{contact.phone}}">{{contact.formattedPhone}}</a></div>
 </li>
+{{/with}}

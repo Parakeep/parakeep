@@ -5,6 +5,12 @@ define ["app", "router"], (app, Router) ->
   # navigation from this instance.
   app.router = new Router()
 
+  Handlebars.registerHelper 'first', (context, options) -> 
+    if context.length then options.fn(context[0])
+
+  #GO GO GADGET PARSE
+  Parse.initialize "ratnJMKXEJoVfL7OJoFfdeNOeepJd0oQ6Wz0MsF7", "rXWu04kUDnOpQT1vFxH5MeveLsGOd3sqysVOiTMa"
+
   # Trigger the initial route and enable HTML5 History API support, set the
   # root folder to '/' by default.  Change in app.js.
   Parse.history.start
@@ -25,31 +31,4 @@ define ["app", "router"], (app, Router) ->
       # trigger the correct events. The Router's internal `navigate` method
       # calls this anyways.  The fragment is sliced from the root.
       Parse.history.navigate href, true
-
-  #GO GO GADGET PARSE
-  Parse.initialize "ratnJMKXEJoVfL7OJoFfdeNOeepJd0oQ6Wz0MsF7", "rXWu04kUDnOpQT1vFxH5MeveLsGOd3sqysVOiTMa"
-
-  $('header').html(JST.search())
-
-  $('#search').on 'submit', (evt) ->
-    evt.preventDefault()
-    # show loading spinner
-    $('#submit').addClass 'load'
-    # fire off Parse Cloud request
-    Parse.Cloud.run 'venueSearch', { query: $('#query').val(), near: $('#near').val() },
-      success: (response) ->
-        $('#submit').removeClass 'load'
-        list = $('#list').html('')
-        items = JSON.parse(response).response.groups[0].items
-        if items.length
-          list.append(JST.business item) for item in items
-        else
-          list.html JST.error 
-            message: "No results found"
-            icon: 'remove'
-      error: (error) ->
-        $('#loading').addClass 'hide'
-        console.error error
-        $('#list').html JST.error
-          message: error.message
-          icon: 'remove'
+  

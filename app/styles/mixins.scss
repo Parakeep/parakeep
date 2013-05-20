@@ -1,4 +1,4 @@
-@mixin table-row-grid($fixedWidth, $cellSpacing) {
+@mixin table-row-grid($cellSpacing, $rows...) {
 
 	// the infamous table-row layout trick:
 	// two table-cells. one with fixed width and other with width: 100%; 
@@ -9,12 +9,16 @@
 		& > * { 
 			display: table-cell; 					// all children are table cells
 			padding: 0 $cellSpacing $cellSpacing 0; // with bottom, right padding for space
-		} 				
-		& > *:first-child { width: 100%; } 	// first child is 100% width
-		& > *:last-child { 
-			width: $fixedWidth;		// second child is custom width
-			padding-right: 0;		// and no outer side padding
-		}  	
+		}
+		$index: 1;
+		@each $row in $rows {
+			& > *:nth-child(#{$index}) {
+				@if $row == 0 { width: 100%; }
+				@else 		  { width: $row; }
+			}
+			$index: $index + 1;
+		}
+		& > *:last-child { padding-right: 0; }	// and no outer side padding
 		&:last-child > * { padding-bottom: 0; } 	// last child has no bottom padding
 	}
 }
