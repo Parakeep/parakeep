@@ -1,7 +1,5 @@
 define ["app", "router"], (app, Router) ->
   "use strict"
-  
-  window._ = Parse._
 
   # Define your master router on the application namespace and trigger all
   # navigation from this instance.

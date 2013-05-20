@@ -1,6 +1,10 @@
 # all the top-level dependencies go here. simply requiring 'app' will give you all these libraries.
 define ["plugins/backbone.layoutmanager"], () ->
   "use strict"
+
+  # use Parse's bundled Underscore library as global Underscore library.
+  # TODO: lodash is nicer to work with, should we use that instead?
+  window._ = Parse._
   
   # Provide a global location to place configuration settings and module creation.
   app = root: "/"
