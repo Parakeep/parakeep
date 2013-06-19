@@ -8,6 +8,7 @@ require.config
     libs: "../scripts/libs"
     plugins: "../scripts/plugins"
     # Libraries
+    backbone: "../components/backbone"
     bootstrap: "../components/bootstrap-sass/js"
     parse: "../components/parse-js-sdk/lib/parse"
 
@@ -16,5 +17,5 @@ require.config
       exports: "Parse"
     
     # Backbone.LayoutManager depends on Parse now!
-    "plugins/backbone.layoutmanager": ["parse"]
+    # "plugins/backbone.layoutmanager": ["parse"]
 

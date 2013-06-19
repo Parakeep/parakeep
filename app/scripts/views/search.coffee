@@ -4,8 +4,8 @@ define ['bootstrap/bootstrap-typeahead', 'bootstrap/bootstrap-modal'], ->
 	###
 	Manages form to search for foursquare venues and add them to a Listen.ItemCollection
 	###
-	class SearchView extends Parse.View
 		template: 'search2'
+	class SearchView extends Backbone.View
 
 		className: 'foursquare-modal'
 

@@ -3,16 +3,17 @@ define ['app', 'views/navbar', 'views/search', 'views/index', 'views/list', 'mod
 	"use strict"
 	
 	# Defining the application router, you can attach sub routers here.
-	Router = Parse.Router.extend
+	Router = Backbone.Router.extend
 		routes:
-			"": "index"
+			'': 'index'
 			'list/:id': 'list'
 			'user': 'user'
 			'user/:name': 'user'
 
 		initialize: ->
-			Parakeep.useLayout 'index'
-			Parakeep.layout.setView('#navbar', new NavbarView()).render()
+			Parakeep.useLayout 'layouts/index'
+			Parakeep.layout.setView('#navbar', 
+				new NavbarView()).render()
 
 		index: ->
 			# create an IndexView with empty ListCollection, to be fetched in the view
@@ -26,7 +27,8 @@ define ['app', 'views/navbar', 'views/search', 'views/index', 'views/list', 'mod
 				id: listId
 			list.fetch
 				success: ->
-					Parakeep.layout.setView('#contents', new ListView(model: list)).render()
+					Parakeep.layout.setView('#contents', 
+						new ListView(model: list)).render()
 				error: ->
 					# if list lookup fails then redirect to index
 					Parse.history.navigate '', true

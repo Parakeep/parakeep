@@ -1,10 +1,6 @@
 # all the top-level dependencies go here. simply requiring 'app' will give you all these libraries.
-define ["plugins/backbone.layoutmanager"], () ->
+define ->
   "use strict"
-
-  # use Parse's bundled Underscore library as global Underscore library.
-  # TODO: lodash is nicer to work with, should we use that instead?
-  window._ = Parse._
   
   # Provide a global location to place configuration settings and module creation.
   app = root: "/"
@@ -13,11 +9,8 @@ define ["plugins/backbone.layoutmanager"], () ->
   JST = window.JST = window.JST or {}
   
   # Configure LayoutManager with Backbone Boilerplate defaults.
-  Parse.LayoutManager.configure
+  Backbone.Layout.configure
     manage: true
-    
-    paths:
-      layout: 'layouts/'
 
     fetch: (path) ->
       # Handlebars pre-compiled templates make this about as easy as possible.
@@ -26,7 +19,7 @@ define ["plugins/backbone.layoutmanager"], () ->
       JST[path]
   
   # Mix Backbone.Events, modules, and layout management into the app object.
-  _.extend app, Parse.Events,
+  _.extend app, Backbone.Events,
     
     # Create a custom object with a nested Views object.
     module: (additionalProps) ->
@@ -39,9 +32,9 @@ define ["plugins/backbone.layoutmanager"], () ->
       # If a layout already exists, remove it from the DOM.
       @layout.remove()  if @layout
       # Create a new Layout.
-      layout = new Parse.Layout
+      layout = new Backbone.Layout
         template: name
-        className: "layout " + name
+        className: "layout menu-container " + name
         id: "layout"
       # Insert into the DOM.
       $("#main").empty().append layout.el

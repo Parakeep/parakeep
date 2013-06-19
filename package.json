@@ -26,7 +26,7 @@
     "grunt-svgmin": "~0.1.0",
     "grunt-concurrent": "~0.1.0",
     "matchdep": "~0.1.1",
-    "grunt-contrib-handlebars": "~0.5.8",
+    "grunt-contrib-handlebars": "~0.5.9",
     "grunt-bower-task": "~0.2.3"
   },
   "engines": {

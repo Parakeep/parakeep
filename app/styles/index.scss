@@ -6,9 +6,9 @@ $navbarBackgroundHighlight: #42b879;
 /* remember to remove line 30: @import "sprites"; from bootstrap.scss */
 @import "../components/bootstrap-sass/lib/bootstrap";
 
-@import "font-awesome.css";
 
 $mobileWidth: 500px;
+@import "../components/font-awesome/scss/font-awesome";
 
 // utility files
 @import "mixins";

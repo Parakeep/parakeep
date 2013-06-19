@@ -4,7 +4,7 @@ define ['models/listen', 'views/item', 'views/search'], (Listen, ItemView, Searc
 	and binds events to manage changes. Contains SearchView for finding and adding businesses
 	to the collection.
 	###
-	class ListView extends Parse.View
+	class ListView extends Backbone.View
 		template: 'list'
 		itemTemplate: 'items/business'
 		itemClassName: 'business item'

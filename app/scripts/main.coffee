@@ -13,7 +13,7 @@ define ["app", "router"], (app, Router) ->
 
   # Trigger the initial route and enable HTML5 History API support, set the
   # root folder to '/' by default.  Change in app.js.
-  Parse.history.start
+  Backbone.history.start
     # pushState: true
     root: app.root
 
@@ -30,5 +30,5 @@ define ["app", "router"], (app, Router) ->
       # `Backbone.history.navigate` is sufficient for all Routers and will
       # trigger the correct events. The Router's internal `navigate` method
       # calls this anyways.  The fragment is sliced from the root.
-      Parse.history.navigate href, true
+      Backbone.history.navigate href, true
   

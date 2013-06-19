@@ -2,7 +2,7 @@ define ['models/listen'], (Listen) ->
 	###
 	Manages form to create a new Listen.List
 	###
-	class NewListView extends Parse.View
+	class NewListView extends Backbone.View
 		template: 'new-list'
 
 		events:

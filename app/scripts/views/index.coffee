@@ -2,7 +2,7 @@ define ['views/list', 'views/item', 'views/new-list', 'models/listen'], (ListVie
 	###
 	The Main Page, shows a list of all public lists.
 	###
-	class IndexView extends Parse.View
+	class IndexView extends Backbone.View
 		template: 'list'
 		itemTemplate: 'items/list'
 		itemClassName: 'list'
