@@ -1,11 +1,12 @@
-define ['app', 'views/navbar', 'views/search', 'views/index', 'views/list', 'models/listen'], 
-(Parakeep, NavbarView, SearchView, IndexView, ListView, Listen) ->
+define ['app', 'views/menu', 'views/navbar', 'views/search', 'views/index', 'views/list', 'models/listen'], 
+(Parakeep, MenuView, NavbarView, SearchView, IndexView, ListView, Listen) ->
 	"use strict"
 	
 	# Defining the application router, you can attach sub routers here.
 	Router = Backbone.Router.extend
 		routes:
 			'': 'index'
+			'search': 'search'
 			'list/:id': 'list'
 			'user': 'user'
 			'user/:name': 'user'
@@ -14,12 +15,24 @@ define ['app', 'views/navbar', 'views/search', 'views/index', 'views/list', 'mod
 			Parakeep.useLayout 'layouts/index'
 			Parakeep.layout.setView('#navbar', 
 				new NavbarView()).render()
+			Parakeep.layout.setView('#menu',
+				new MenuView()).render()
 
 		index: ->
 			# create an IndexView with empty ListCollection, to be fetched in the view
 			Parakeep.layout.setView('#contents', new IndexView
 				model: new Listen.ListCollection()
 			).render()
+
+		search: ->
+			list = new Listen.ItemCollection()
+			$('#searchbtn').addClass('active')
+			Parakeep.layout.setView('#search', 
+				new SearchView(list: list)).render()
+			Parakeep.layout.setView('#contents', new ListView(
+				list: list, 
+				itemTemplate: 'items/minivenue'
+			)).render()
 
 		list: (listId, title) ->
 			# lookup the requested list and then make a ListView for it

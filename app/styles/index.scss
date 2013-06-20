@@ -1,13 +1,8 @@
-
-$navbarHeight: 60px;
-$navbarBackground: #0f9f6f;
-$navbarBackgroundHighlight: #42b879;
+@import "variables";
 
 /* remember to remove line 30: @import "sprites"; from bootstrap.scss */
 @import "../components/bootstrap-sass/lib/bootstrap";
 
-
-$mobileWidth: 500px;
 @import "../components/font-awesome/scss/font-awesome";
 
 // utility files
@@ -15,13 +10,17 @@ $mobileWidth: 500px;
 
 // individual template files
 @import "navbar";
-@import "search-modal";
+@import "search";
 @import "business";
 @import "list";
+@import "menu";
 
 body {
-	background: rgb(241,242,242);		
+	background: rgb(241,242,242);	
 }
+
+// prevent horizontal scrolling ALWAYS
+#main { overflow-x: hidden; }
 
 .container-fluid {
 	padding: 0 !important;
@@ -47,5 +46,41 @@ body {
 		left: 10%;
 		right: 10%;
 		margin: 0;
+	}
+}
+
+.table-row {
+	display: table;
+
+	& > * {
+		display: table-cell;
+		vertical-align: top;
+		padding-right: 10px;
+
+		&:last-child, &.full {
+			padding-right: 0;
+		}
+	}
+
+	.fixed { width: 0; } 
+	.variable { width: 100%; }
+}
+
+.arrow {
+	position: relative;
+
+	&.active:after {
+		top: 100%;
+		border: solid transparent;
+		content: " ";
+		height: 0;
+		width: 0;
+		position: absolute;
+		pointer-events: none;
+		border-color: rgba(0, 0, 0, 0);
+		border-top-color: black;
+		border-width: $arrowSize;
+		left: 50%;
+		margin-left: -$arrowSize;
 	}
 }

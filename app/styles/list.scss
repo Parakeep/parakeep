@@ -1,7 +1,8 @@
 #list {
 	margin-top: 20px;
 	li {
-
+		position: relative;
+		
 		&.list {
 			margin: 0 20px 20px 20px;
 			font-size: 24px;
@@ -9,7 +10,6 @@
 		}
 
 		&.item {
-
 		}
 	}
 }

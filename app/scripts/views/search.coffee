@@ -1,125 +1,104 @@
-define ['bootstrap/bootstrap-typeahead', 'bootstrap/bootstrap-modal'], ->
-	window.DELAY = 100
-
+define ->
 	###
-	Manages form to search for foursquare venues and add them to a Listen.ItemCollection
+	Manages the Navbar at the top of the frame.
+	Not a lot going on here now. 
 	###
-		template: 'search2'
 	class SearchView extends Backbone.View
+		template: 'search-tabs'
 
-		className: 'foursquare-modal'
-
-		events:
-			'submit form': 'createItem'
-
-		serialize: ->
-			# preserve user-entered location
-			near: @_geocode?.displayName or 'seattle'
+		# inserted into #navbar so add .navbar-inner to this View's el
+		className: 'search'
 
 		afterRender: ->
-			# turn the query field into a bootstrap typeahead
-			@$('#query').typeahead
-				minLength: 3
-				# data source is foursquare search
-				source: (query, callback) =>
-					@search query, (venues) => 
-						if venues.length
-							# cache the underscore-wrapped array of venues
-							@venues = _(venues)
-							# return all the venue names
-							callback _.pluck venues, 'name'
-						else callback [JST.error(message: 'No Results')]
-				matcher: -> true
-				highlighter: (name) => 
-					# find the venue with the given name and render it as minivenue
-					JST['items/minivenue'] @venues.find (item) -> item.name is name
-				updater: (name) => 
-					# remember chosen venue data so we can save it later
-					@venue = @venues.find (item) -> item.name is name
-					# render business card into data
-					# TODO: unhack-ify?
-					@$('#data').css(height: 'auto')		# let #data autosize itself now
-						.html($('<div>').addClass('business').html JST['items/business'] data: @venue)
-						.append JST['items/flavor']()	# append textarea after business card
-					@$('textarea').focus()
-					name
+			@$input = @$('#query')
+			@$input.attr('placeholder', @formData.query.placeholder)
 
-		# calls foursquare to turn query string into list of potential venues
-		search: (query, callback) ->
-			evt?.preventDefault()
-			@timeout = undefined
+		events:
+			'click .nav-tabs a': 'changeTab'
+			'submit form': 'submit'
 
-			callback = if _.isFunction(callback) then callback else @success
+		formData:
+			query: 
+				placeholder: 'Find a business or vendor'
+			near: 
+				placeholder: 'Search near a location'
+			user: 
+				placeholder: 'Search your friends'
 
+		defaultParams:
+			limit: 8
+			intent: 'browse'
+
+		changeTab: (evt) ->
+			evt.preventDefault()
+			$tgt = $(evt.currentTarget)
+			oldTab = @$('.active').data('name')
+			newTab = $tgt.parent().data('name')
+			$input = @$('#' + oldTab)
+
+			# save input value
+			@formData[oldTab].value = $input.val()
+			@$('.active span').text($input.val())
+
+			$input.addClass('hide')
+			@$('#' + newTab).removeClass('hide').focus()
+
+			$tgt.parent().takeClass('active', '#search')
+
+		getQueryParams: ->
+			promise = $.Deferred()
+			query = @$('#query').val().trim()
 			near = @$('#near').val().trim()
+			if near
+				return promise.resolve _.extend @defaultParams, { query: query, near: near }
+			else
+				navigator.geolocation.getCurrentPosition (position) =>
+					promise.resolve _.extend @defaultParams,
+						query: query
+						ll: "#{position.coords.latitude},#{position.coords.longitude}"
+				, (error) ->
+					promise.reject which: 'near'
 
-			# if location has changed then do a venue search to geocode result
-			if near isnt @_geocode?.displayName
-				Parse.Cloud.run 'venueSearch', { query: query, near: near, limit: 8 },
+			return promise.promise()
+
+		submit: (evt) ->
+			evt.preventDefault()
+			promise = @getQueryParams()
+			promise.done (params) =>
+				Parse.Cloud.run 'venueSearch', params,
 					success: (response) =>
 						window.response = JSON.parse(response).response
 						# update cached geocode, keep it fresh
-						@_geocode = window.response.geocode.feature
-						@$('#near').val(@_geocode.displayName)
-						callback window.response.venues
+						if window.response.geocode
+							@_geocode = window.response.geocode.feature
+							@$('#enter-near span').text(@_geocode.displayName)
+							@$('#near').val(@_geocode.displayName)
+						@success window.response.venues
 					error: @error
-			# otherwise use faster venue completion API for typing in the text box
-			else
-				# use cached geocode coordinates for lat-lng location search
-				center = @_geocode.geometry.center
-				Parse.Cloud.run 'venueCompletion', { query: query, ll: center.lat + ',' + center.lng, limit: 8 },
-					success: (response) =>
-						response = JSON.parse(response).response
-						callback response.minivenues
-					error: @error
+			promise.fail (error) =>
+				if error.which is 'near'
+					@$('#enter-near').click()
+					@$('#near').attr('placeholder', 'Please enter a location for this search...')
 
-		# display error message in #data
-		# TODO: better error messages. foursquare gives generic with error codes
-		error: (error) =>
-			$('#data').html JST.error
-				message: error.message
-				icon: 'remove'
-
-		# creates a new item from the modal form and appends it to the item collection
-		createItem: (evt) ->
-			evt.preventDefault()
-			# hide the modal
-			@$('#addModal').modal('hide')
-			# create the new list item using saved venue info and flavor text
-			@options.list.create
-				source: 'foursquare'
-				data: @venue
-				note: @$('#flavor').val()
-				user: Parse.User.current()
-
-		# TODO: unused, but useful timeout gating code to limit number of calls to 4sq
-		keypress: (e) ->
-			if e.keyCode is 13 then @search()
-			else
-				console.log "keypress #{e.keyCode}"
-				if @timeout then window.clearTimeout @timeout
-				@timeout = window.setTimeout @autosearch, window.DELAY
-				# console.log 'setting timeout', @timeout
-
-		# TODO: unused
-		autosearch: =>
-			query = @$('#query').val()
-			if query.length < 3 then return $('#autocomplete').hide()
-			unless query is @_lastQuery
-				@_lastQuery = query
-				@search()
-
-		# TODO: unused
 		success: (venues) ->
 			@$('#submit').removeClass 'load'
-			# TODO: how to add to the list? collection!
-			list = $('#autocomplete').show().html('')
-			if venues.length
-				list.append(JST['items/business'] venue) for venue in venues
-			else
-				list.html JST.error 
-					message: "No results found"
-					icon: 'remove'
 
+			@options.list.reset _.map venues, (venue) ->
+				source: 'foursquare'
+				data: venue
+				
+
+			# @options.list.create
+			# # TODO: how to add to the list? collection!
+			# list = $('#contents').html('')
+			# if venues.length
+			# 	list.append(JST['items/business'] venue) for venue in venues
+			# else
+			# 	list.html JST.error 
+			# 		message: "No results found"
+			# 		icon: 'remove'
+
+		error: (error) =>
+			console.error error
 
 
