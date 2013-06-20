@@ -10,26 +10,36 @@ define ['models/listen', 'views/item', 'views/search'], (Listen, ItemView, Searc
 		itemClassName: 'business item'
 
 		initialize: ->
+			if @options.itemTemplate
+				@itemTemplate = @options.itemTemplate
+
 			# cache selectors
 			@input = @$('#newItem')
 			@listEl = @$('#list')
 
-			# update UI when model changes (infrequent, rename or something)
-			@model.on 'change', @render, @
+			# if a List model is given then get the collection from it
+			if @model
+				# update UI when model changes (infrequent, rename or something)
+				@model.on 'change', @render, @
 
-			# create a collection that loads ListItems from this list
-			@list = @model.items()
+				# create a collection that loads ListItems from this list
+				@list = @model.items()
+				# and kick it off!
+				@list.fetch()
+			# otherwise if 'list' collection option is given, just use that
+			else if @options.list
+				@list = @options.list
+				
 			# collection event to update UI
 			@list.bind 'all', @render, @
-			# and kick it off!
-			@list.fetch()
 
 			# create and cache SearchView to add items to the ItemCollection
 			@seachView = new SearchView
 				list: @list
 
 
-		serialize: -> @model.toJSON()
+		serialize: -> 
+			if @model then @model.toJSON() else title: ''
 
 		beforeRender: ->
 			@setView '#search', @seachView
