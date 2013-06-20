@@ -1,48 +1,37 @@
 define ->
 	###
-	Manages the Navbar at the top of the frame.
-	Not a lot going on here now. 
+	Manages the search panel on #/search. Handles querying foursquare and displaying results.
 	###
 	class SearchView extends Backbone.View
 		template: 'search-tabs'
 
-		# inserted into #navbar so add .navbar-inner to this View's el
 		className: 'search'
 
 		afterRender: ->
 			@$input = @$('#query')
-			@$input.attr('placeholder', @formData.query.placeholder)
 
 		events:
 			'click .nav-tabs a': 'changeTab'
 			'submit form': 'submit'
 
-		formData:
-			query: 
-				placeholder: 'Find a business or vendor'
-			near: 
-				placeholder: 'Search near a location'
-			user: 
-				placeholder: 'Search your friends'
-
+		# default foursquare query params
 		defaultParams:
 			limit: 8
 			intent: 'browse'
 
 		changeTab: (evt) ->
 			evt.preventDefault()
+			# variables!
 			$tgt = $(evt.currentTarget)
 			oldTab = @$('.active').data('name')
 			newTab = $tgt.parent().data('name')
 			$input = @$('#' + oldTab)
-
 			# save input value
-			@formData[oldTab].value = $input.val()
 			@$('.active span').text($input.val())
-
+			# hide old input, show new one
 			$input.addClass('hide')
 			@$('#' + newTab).removeClass('hide').focus()
-
+			# change active tab
 			$tgt.parent().takeClass('active', '#search')
 
 		getQueryParams: ->
@@ -63,6 +52,7 @@ define ->
 
 		submit: (evt) ->
 			evt.preventDefault()
+			# get query params (and current location if needed)
 			promise = @getQueryParams()
 			promise.done (params) =>
 				Parse.Cloud.run 'venueSearch', params,
@@ -75,28 +65,21 @@ define ->
 							@$('#near').val(@_geocode.displayName)
 						@success window.response.venues
 					error: @error
+			# if user didn't put location and refused to share current then make them enter one.
 			promise.fail (error) =>
 				if error.which is 'near'
 					@$('#enter-near').click()
 					@$('#near').attr('placeholder', 'Please enter a location for this search...')
 
 		success: (venues) ->
+			# TODO: make this work
 			@$('#submit').removeClass 'load'
 
+			# reset list collection with the venues we just fetched, 
+			# but map them into appropriate item format.
 			@options.list.reset _.map venues, (venue) ->
 				source: 'foursquare'
 				data: venue
-				
-
-			# @options.list.create
-			# # TODO: how to add to the list? collection!
-			# list = $('#contents').html('')
-			# if venues.length
-			# 	list.append(JST['items/business'] venue) for venue in venues
-			# else
-			# 	list.html JST.error 
-			# 		message: "No results found"
-			# 		icon: 'remove'
 
 		error: (error) =>
 			console.error error
