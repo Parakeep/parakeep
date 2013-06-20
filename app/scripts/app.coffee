@@ -7,6 +7,12 @@ define ->
   
   # Localize or create a new JavaScript Template object.
   JST = window.JST = window.JST or {}
+
+  # removes the given class from all elements (optionally within scope selector)
+  # and applies it to this element. useful for singleton class, such as .active
+  $.fn.takeClass = (targetClass, scope='') ->
+    $(scope + " ." + targetClass).removeClass targetClass
+    @addClass targetClass
   
   # Configure LayoutManager with Backbone Boilerplate defaults.
   Backbone.Layout.configure

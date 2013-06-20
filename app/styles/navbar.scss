@@ -3,12 +3,41 @@
 }
 
 .navbar {
+	margin-bottom: 0;
+	.navbar-inner { 
+		border-radius: 0; 
+		
+		> * {
+			font-size: 2em;
+			padding: 15px;
+		}
+	}
+
+
 	// center giant brand image with comfortable padding
 	.brand {
 		text-align: center;
-		padding: 5px 20px;
 		float: none;
+		a {
+			text-decoration: none;
+			color: white;
+			vertical-align: middle;
+		}
+	}
 
-		img { height: 50px; }
+	.btn-nav {
+		border: none;
+		background: none;
+		color: rgba(white, 0.5);
+		text-shadow: $textShadow;
+
+		&:hover, &:active {
+			color: white;
+			text-decoration: none;
+		}
+
+		&.active:after {
+			border-top-color: $teal;
+		}
 	}
 }

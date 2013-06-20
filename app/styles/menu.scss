@@ -1,0 +1,117 @@
+$iconSize: 40px;
+$swipeIconSize: 30px;
+$animation: left 0.5s;
+
+.menu-container {
+	position: relative;
+	left: 0;
+	@include transition($animation);
+
+	.navbar {	
+		@include transition($animation);
+	}
+
+	&.menu-open {
+		left: $menuWidth;
+
+		.navbar {
+			left: $menuWidth;
+		}
+
+		#menu { color: white; }
+	}
+}
+
+
+.menu {
+	width: $menuWidth;
+	@include transition($animation);
+	
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: -$menuWidth;
+
+	border-right: 1px solid gray;
+	background: $medbeige;
+
+	.menu-open & {
+		left: 0;
+	}
+
+	.menu-vertical {
+		position: absolute;
+		left: 0;
+		right: 0;
+		margin: 0;
+
+		li {
+			font-size: $iconSize;
+			padding: ($menuWidth - $iconSize) / 2;
+			border-top: $bordertop;
+			border-bottom: $borderbottom;
+			color: $darkbeige;
+			text-shadow: $textShadow;
+
+			&:hover { 
+				background: $medblush; 
+				color: white; 
+				text-shadow: none;
+			}
+
+			a {
+				color: inherit;
+				&:hover, &:active {
+					color: inherit;
+					text-decoration: none;
+				}
+			}
+		}
+
+		&.top { 
+			top: 0; 
+			border-bottom: $bordertop;
+		}
+		&.bottom { 
+			bottom: 0; 
+			border-top: $borderbottom;
+		}
+	}
+}
+
+.item {
+	@include transition($animation);
+
+	&.menu-open {
+		left: -95%;
+	}
+}
+
+.swipe-menu {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 100%;
+	width: 100%;
+	background: $medbeige;
+	box-shadow: 0 0 5px rgba(black, 0.5) inset;
+	@include transition($animation);
+
+	.menu-horizontal {
+		li {
+			font-size: $swipeIconSize;
+			padding: ((70px - $swipeIconSize) / 2);
+			color: white;
+			width: 32%;
+			box-sizing: border-box;
+			text-align: center;
+
+			button {
+				font-size: inherit;
+				color: inherit;
+				border: none;
+				background: none;
+			}
+		}
+	}
+}

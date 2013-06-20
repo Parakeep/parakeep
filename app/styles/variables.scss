@@ -1,0 +1,30 @@
+
+$FontAwesomePath: "fonts";
+
+/* LOVELY COLORS */
+$darkgray: 	#444444;
+$darksage: 	#53625b;
+$medsage: 	#697c73;
+$ltsage: 	#929a98;
+$mint: 		#c3d7cd;
+$teal: 		#53c38d;
+$darkblush: #de695d;
+$medblush: 	#e77569;
+$darkbeige: #bebeb5;
+$medbeige: 	#d0d0c8;
+$ltbeige: 	#e0e1de;
+
+$bordertop:    1px solid rgba(white, 0.75);
+$borderbottom: 1px solid #b6b7b4;
+
+/* BOOTSTRAP OVERRIDES */
+$navbarHeight: 60px;
+$navbarBackground: $teal;
+$navbarBackgroundHighlight: $teal;
+
+/* ELEMENT SIZING */
+$mobileWidth: 500px;
+$menuWidth: 80px;
+$arrowSize: 8px;
+
+$textShadow: 0 -2px 0 rgba(black, 0.15);

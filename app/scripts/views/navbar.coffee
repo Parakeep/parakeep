@@ -8,3 +8,9 @@ define ->
 
 		# inserted into #navbar so add .navbar-inner to this View's el
 		className: 'navbar-inner'
+
+		events:
+			'click #menu': 'toggleMenu'
+
+		toggleMenu: ->
+			$('#layout').toggleClass('menu-open')
