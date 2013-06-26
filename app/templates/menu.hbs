@@ -6,5 +6,11 @@
 </ul>
 <ul class="menu-vertical bottom unstyled">
 	<li><a href="#/settings"><i class="icon-cog"></i></a></li>
-	<li><a href="#/logout"><i class="icon-signout icon-rotate-180"></i></a></li>
+	<li>
+	{{#ifLoggedIn this}}
+		<a href="#/logout"><i class="icon-signout icon-rotate-180"></i></a>
+	{{else}}
+		<a href="#/login"><i class="icon-signin"></i></a>
+	{{/ifLoggedIn}}
+	</li>
 </ul>

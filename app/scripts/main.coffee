@@ -5,12 +5,6 @@ define ["app", "router"], (app, Router) ->
   # navigation from this instance.
   app.router = new Router()
 
-  Handlebars.registerHelper 'first', (context, options) -> 
-    if context.length then options.fn(context[0])
-
-  #GO GO GADGET PARSE
-  Parse.initialize "ratnJMKXEJoVfL7OJoFfdeNOeepJd0oQ6Wz0MsF7", "rXWu04kUDnOpQT1vFxH5MeveLsGOd3sqysVOiTMa"
-
   # Trigger the initial route and enable HTML5 History API support, set the
   # root folder to '/' by default.  Change in app.js.
   Backbone.history.start

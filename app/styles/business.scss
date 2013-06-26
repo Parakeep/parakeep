@@ -37,6 +37,9 @@
 }
 
 .minivenue {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 	.icon { 
 		float: right; 
 		margin-top: -2px;

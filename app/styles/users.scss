@@ -1,0 +1,23 @@
+.btn.facebook {
+	@include gradientBar($fbBlue, darken($fbBlue, 10%));
+	background-color: darken($fbBlue, 10%);
+	color: white;
+	text-shadow: 0 1px 0 rgba(0,0,0,0.5);
+	font-size: 1.5em;
+	padding: .5em 1em;
+
+	display: block;
+	margin: 3em auto;
+
+	i {
+		font-size: 1.5em;
+		margin-right: .25em;
+	}
+	i, span {
+		vertical-align: middle;
+	}
+}
+
+#login {
+
+}

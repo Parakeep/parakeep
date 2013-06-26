@@ -1,9 +1,15 @@
 # all the top-level dependencies go here. simply requiring 'app' will give you all these libraries.
 define ->
   "use strict"
-  
+
   # Provide a global location to place configuration settings and module creation.
   app = root: "/"
+
+  Handlebars.registerHelper 'first', (context, options) -> 
+    if context.length then options.fn(context[0])
+
+  Handlebars.registerHelper 'ifLoggedIn', (context, options) ->
+    if Parse.User.current() then options.fn(context) else options.inverse(context)
   
   # Localize or create a new JavaScript Template object.
   JST = window.JST = window.JST or {}

@@ -10,8 +10,37 @@
         <meta name="viewport" content="width=device-width">
         <title></title>
         <link rel="stylesheet" href="styles/index.css">
+        <script src="http://www.parsecdn.com/js/parse-1.2.8.min.js"></script>
     </head>
     <body>
+        <!-- FAAAAAAACEBOOOOOOOK -->
+        <div id="fb-root"></div>
+        <script>
+            Parse.initialize("ratnJMKXEJoVfL7OJoFfdeNOeepJd0oQ6Wz0MsF7", "rXWu04kUDnOpQT1vFxH5MeveLsGOd3sqysVOiTMa")
+        </script>
+        <script>
+            window.fbAsyncInit = function() {
+                Parse.FacebookUtils.init({
+                    appId      : '178096745691553', // Facebook App ID
+                    // channelUrl : 'localhost:9000/channel.html', // Channel File
+                    status     : true, // check login status
+                    cookie     : true, // enable cookies to allow Parse to access the session
+                    xfbml      : true  // parse XFBML
+                });
+
+                // Additional initialization code here
+            };
+
+            // Load the SDK asynchronously
+            (function(d, s, id){
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) {return;}
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/all.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
+
         <!-- Main container. -->
         <div id="main"></div>
         
@@ -28,7 +57,7 @@
         <script src="components/underscore/underscore.js"></script>
         <script src="components/backbone/backbone.js"></script>
         <script src="components/layoutmanager/backbone.layoutmanager.js"></script>
-        <script src="components/parse-js-sdk/lib/parse.js"></script>
+        <!-- <script src="components/parse-js-sdk/lib/parse.js"></script> -->
         <script src="components/handlebars/handlebars.runtime.js"></script>
         <script src="scripts/compiled-templates.js"></script>
         <script data-main="scripts/config" src="scripts/libs/require.js"></script>

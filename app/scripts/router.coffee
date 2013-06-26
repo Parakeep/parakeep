@@ -1,5 +1,5 @@
-define ['app', 'views/menu', 'views/navbar', 'views/search', 'views/index', 'views/list', 'models/listen'], 
-(Parakeep, MenuView, NavbarView, SearchView, IndexView, ListView, Listen) ->
+define ['app', 'views/menu', 'views/navbar', 'views/search', 'views/index', 'views/list', 'views/login', 'models/listen'], 
+(Parakeep, MenuView, NavbarView, SearchView, IndexView, ListView, LoginView, Listen) ->
 	"use strict"
 	
 	# Defining the application router, you can attach sub routers here.
@@ -10,15 +10,18 @@ define ['app', 'views/menu', 'views/navbar', 'views/search', 'views/index', 'vie
 			'list/:id': 'list'
 			'user': 'user'
 			'user/:name': 'user'
+			'login': 'login'
+			'logout': 'logout'
 
 		initialize: ->
 			Parakeep.useLayout 'layouts/index'
 			Parakeep.layout.setView('#navbar', 
-				new NavbarView()).render()
+				@navbar = new NavbarView()).render()
 			Parakeep.layout.setView('#menu',
-				new MenuView()).render()
+				@menu = new MenuView()).render()
 
 		index: ->
+			@menu.render()
 			# create an IndexView with empty ListCollection, to be fetched in the view
 			Parakeep.layout.setView('#contents', new IndexView
 				model: new Listen.ListCollection()
@@ -45,6 +48,10 @@ define ['app', 'views/menu', 'views/navbar', 'views/search', 'views/index', 'vie
 				error: ->
 					# if list lookup fails then redirect to index
 					Parse.history.navigate '', true
+
+		login: ->
+			Parakeep.layout.setView('#contents', 
+				new LoginView()).render()
 
 		# TODO: implement authentication first
 		user: (username) ->

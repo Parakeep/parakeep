@@ -4,6 +4,10 @@
             "applicationId": "ratnJMKXEJoVfL7OJoFfdeNOeepJd0oQ6Wz0MsF7", 
             "masterKey": "RaGCPpWqbvNiZGHkWbUZyDjyjbjGoVluDkzTQfmR"
         }, 
+        "Parakeep dev": {
+            "applicationId": "kS72XcMjqlLlAMqx5xOGA6P215JsHtPDczr5BjOx", 
+            "masterKey": "FZhJZRDKB1ojO7JKfQK6SS7MYALJ9EVoQMsEGeTj"
+        }, 
         "_default": {
             "link": "Parakeep"
         }
