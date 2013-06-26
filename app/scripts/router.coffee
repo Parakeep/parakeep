@@ -53,6 +53,11 @@ define ['app', 'views/menu', 'views/navbar', 'views/search', 'views/index', 'vie
 			Parakeep.layout.setView('#contents', 
 				new LoginView()).render()
 
+		logout: ->
+			Parse.User.logOut()
+			@menu.render()
+			window.history.back()
+
 		# TODO: implement authentication first
 		user: (username) ->
 			# display a User page if the username exists
