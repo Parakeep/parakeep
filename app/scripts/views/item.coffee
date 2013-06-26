@@ -16,7 +16,7 @@ define ->
 			'click': 'closeMenu'
 
 		openMenu: (evt) ->
-			@$el.addClass('menu-open')
+			@$el.takeClass('menu-open')
 
 		closeMenu: (evt) ->
 			@$el.removeClass('menu-open')

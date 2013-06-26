@@ -33,13 +33,19 @@ define ['app'], (app) ->
 			private: false
 			collaborative: false
 
+		# returns a Listen.ItemCollection configured to fetch items in this list.
+		# all that needs to be done is call fetch() on the collection.
 		items: ->
+			# return cached collection reference if it exists
 			return @_items if @_items
-			# return @get('items') if @get('items')
-			@_items = Listen.createItemCollection @
-			# @set 'items', items = new Listen.ItemCollection(list: @)
+			# create collection and construct query to fetch list items belong to this list.
+			@_items = new Listen.ItemCollection()
+			@_items.list = @
+			@_items.query = new Parse.Query(Listen.Item)
+			@_items.query.equalTo('list', @).include 'user'
 			@_items
 
+		# creates a new item in this list, injecting the correct list reference
 		createItem: (options) ->
 			_.extend options, list: @
 			@items().create options
@@ -53,6 +59,7 @@ define ['app'], (app) ->
 			data: ''
 			order: 0
 
+		# sort by time
 		comparator: (item) -> item.get('createdAt')
 
 
@@ -75,12 +82,5 @@ define ['app'], (app) ->
 
 	Listen.ListCollection = Parse.Collection.extend
 		model: Listen.List
-
-	Listen.createItemCollection = (list) ->
-		collection = new Listen.ItemCollection()
-		collection.list = list
-		collection.query = new Parse.Query(Listen.Item)
-		collection.query.equalTo('list', list).include 'user'
-		collection
 
 	Listen

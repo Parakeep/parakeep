@@ -21,7 +21,6 @@ define ['models/listen', 'views/item', 'views/search'], (Listen, ItemView, Searc
 			if @model
 				# update UI when model changes (infrequent, rename or something)
 				@model.on 'change', @render, @
-
 				# create a collection that loads ListItems from this list
 				@list = @model.items()
 				# and kick it off!
@@ -33,16 +32,11 @@ define ['models/listen', 'views/item', 'views/search'], (Listen, ItemView, Searc
 			# collection event to update UI
 			@list.bind 'all', @render, @
 
-			# create and cache SearchView to add items to the ItemCollection
-			@seachView = new SearchView
-				list: @list
-
 
 		serialize: -> 
 			if @model then @model.toJSON() else title: ''
 
 		beforeRender: ->
-			@setView '#search', @seachView
 			# Iterate over the passed collection and create a view for each item.
 			@list?.each (model) =>
 				# Pass the sample data to the new SomeItem View.
