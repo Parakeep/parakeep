@@ -1,7 +1,7 @@
-define ['app', 'views/menu', 'views/navbar', 'views/search', 'views/index', 'views/list', 'views/login', 'models/listen'], 
-(Parakeep, MenuView, NavbarView, SearchView, IndexView, ListView, LoginView, Listen) ->
+define ['app', 'views/menu', 'views/navbar', 'views/search', 'views/index', 'views/list', 'views/login', 'views/user', 'models/listen'],
+(Parakeep, MenuView, NavbarView, SearchView, IndexView, ListView, LoginView, UserView, Listen) ->
 	"use strict"
-	
+
 	# Defining the application router, you can attach sub routers here.
 	Router = Backbone.Router.extend
 		routes:
@@ -12,10 +12,11 @@ define ['app', 'views/menu', 'views/navbar', 'views/search', 'views/index', 'vie
 			'user/:name': 'user'
 			'login': 'login'
 			'logout': 'logout'
+			'profile': 'user'
 
 		initialize: ->
 			Parakeep.useLayout 'layouts/index'
-			Parakeep.layout.setView('#navbar', 
+			Parakeep.layout.setView('#navbar',
 				@navbar = new NavbarView()).render()
 			Parakeep.layout.setView('#menu',
 				@menu = new MenuView()).render()
@@ -30,10 +31,10 @@ define ['app', 'views/menu', 'views/navbar', 'views/search', 'views/index', 'vie
 		search: ->
 			list = new Listen.ItemCollection()
 			$('#searchbtn').addClass('active')
-			Parakeep.layout.setView('#search', 
+			Parakeep.layout.setView('#search',
 				new SearchView(list: list)).render()
 			Parakeep.layout.setView('#contents', new ListView(
-				list: list, 
+				list: list,
 				itemTemplate: 'items/minivenue'
 			)).render()
 
@@ -43,14 +44,14 @@ define ['app', 'views/menu', 'views/navbar', 'views/search', 'views/index', 'vie
 				id: listId
 			list.fetch
 				success: ->
-					Parakeep.layout.setView('#contents', 
+					Parakeep.layout.setView('#contents',
 						new ListView(model: list)).render()
 				error: ->
 					# if list lookup fails then redirect to index
 					Parse.history.navigate '', true
 
 		login: ->
-			Parakeep.layout.setView('#contents', 
+			Parakeep.layout.setView('#contents',
 				new LoginView()).render()
 
 		logout: ->
@@ -58,17 +59,22 @@ define ['app', 'views/menu', 'views/navbar', 'views/search', 'views/index', 'vie
 			@menu.render()
 			window.history.back()
 
+		# profile: ->
+		# 	Parakeep.layout.setView('#profile', new ProfileView()).render()
+
+
 		# TODO: implement authentication first
 		user: (username) ->
 			# display a User page if the username exists
-			# if username
-			# 	query = new Parse.Query(Parse.User)
-			# 	query.equalTo 'username', username
-			# 	query.first
-			# 	success: (user) ->
-			# 	Parakeep.layout.setView('#contents', new UserView(model: user)).render()
-			# 	error: (user, error) ->
-			# 	# what happens here? null model?
-			# else
-			# 	Parakeep.layout.setView('#contents', new UserView(model: Parse.User.current())).render()
+			if username
+				query = new Parse.Query(Parse.User)
+				query.equalTo 'username', username
+				query.first
+					success: (user) ->
+						Parakeep.layout.setView('#contents', new UserView(model: user)).render()
+					error: (user, error) ->
+						alert 'What the ish, this usar doesn\'t exist'
+						# what happens here? null model?
+			else
+				Parakeep.layout.setView('#contents', new UserView(model: Parse.User.current())).render()
 
