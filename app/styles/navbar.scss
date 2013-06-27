@@ -6,6 +6,7 @@
 	margin-bottom: 0;
 	.navbar-inner { 
 		border-radius: 0; 
+		padding: 0;
 		
 		> * {
 			font-size: 2em;
@@ -19,6 +20,8 @@
 		text-align: center;
 		float: none;
 		a {
+			font-family: $Raleway;
+			line-height: normal;
 			text-decoration: none;
 			color: white;
 			vertical-align: middle;
@@ -30,6 +33,7 @@
 		background: none;
 		color: rgba(white, 0.5);
 		text-shadow: $textShadow;
+		line-height: normal;
 
 		&:hover, &:active {
 			color: white;

@@ -1,0 +1,44 @@
+/* @license
+ * MyFonts Webfont Build ID 2589632, 2013-06-26T20:39:54-0400
+ * 
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are 
+ * explicitly restricted from using the Licensed Webfonts(s).
+ * 
+ * You may obtain a valid license at the URLs below.
+ * 
+ * Webfont: Cassia Extra Light by Hoftype
+ * URL: http://www.myfonts.com/fonts/hoftype/cassia/extra-light/
+ * Copyright: Copyright (c) 2012 by Dieter Hofrichter. All rights reserved.
+ * Licensed pageviews: Unlimited
+ * 
+ * 
+ * License: http://www.myfonts.com/viewlicense?type=web&buildid=2589632
+ * 
+ * © 2013 MyFonts Inc
+*/
+$fontPath: 'fonts/';
+
+$cassiaFilename: 'cassia_extra_light';
+@font-face {
+	font-family: 'Cassia-ExtraLight';
+	src: url($fontPath + $cassiaFilename + '.eot');
+	src: url($fontPath + $cassiaFilename + '.eot?#iefix') format('embedded-opentype'),
+		 url($fontPath + $cassiaFilename + '.woff') format('woff'),
+		 url($fontPath + $cassiaFilename + '.ttf') format('truetype');
+}
+
+$ralewayFilename: 'Raleway-Light-webfont';
+@font-face {
+	font-family: 'Raleway-Light';
+	src: url($fontPath + $ralewayFilename + '.eot');
+	src: url($fontPath + $ralewayFilename + '.eot?#iefix') format('embedded-opentype'),
+		 url($fontPath + $ralewayFilename + '.woff') format('woff'),
+		 url($fontPath + $ralewayFilename + '.ttf') format('truetype');
+}
+
+// @import url(http://fonts.googleapis.com/css?family=Raleway:200);
+ 
+// VARIABLES! Oh so easy.
+$Cassia: 'Cassia-ExtraLight', 'Georgia', sans-serif;
+$Raleway: 'Raleway-Light', 'Helvetica Neue', sans-serif;
