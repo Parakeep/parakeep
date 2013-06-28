@@ -16,6 +16,7 @@ define ['app', 'views/menu', 'views/navbar', 'views/search', 'views/index', 'vie
 			'list/:id': 'list'
 			'user': 'user'
 			'user/:name': 'user'
+			'favorites': 'favorites'
 			'login': 'login'
 			'logout': 'logout'
 
@@ -53,8 +54,13 @@ define ['app', 'views/menu', 'views/navbar', 'views/search', 'views/index', 'vie
 					Parakeep.layout.setView('#contents', 
 						new ListView(model: list)).render()
 				error: ->
+					console.error arguments
 					# if list lookup fails then redirect to index
 					Parse.history.navigate '', true
+
+		favorites: ->
+			# load the current user's favorites list
+			@list Parse.User.current().get('favorites').id
 
 		login: ->
 			Parakeep.layout.setView('#contents', 
