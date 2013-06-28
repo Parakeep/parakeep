@@ -1,6 +1,22 @@
 define ["app", "router"], (app, Router) ->
   "use strict"
 
+  Handlebars.registerHelper 'first', (context, options) -> 
+    if context.length then options.fn(context[0])
+
+  Handlebars.registerHelper 'ifLoggedIn', (context, options) ->
+    if Parse.User.current() then options.fn(context) else options.inverse(context)
+    
+  # allows for dynamically choosing which partial to render.
+  # {{partial [template] [context]}}
+  Handlebars.registerHelper 'partial', (template, context, opts) ->
+    partial = Handlebars.partials[template];
+    throw "partial template '#{template}' not found" unless partial
+    # execute selected partial against context and make it safe
+    new Handlebars.SafeString(partial(context))
+
+  Handlebars.registerPartial 'list', JST['items/list']
+
   # Define your master router on the application namespace and trigger all
   # navigation from this instance.
   app.router = new Router()
