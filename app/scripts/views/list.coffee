@@ -6,7 +6,7 @@ define ['models/listen', 'views/item', 'views/search'], (Listen, ItemView, Searc
 	###
 	class ListView extends Backbone.View
 		template: 'list'
-		itemTemplate: 'items/business'
+		itemTemplate: 'items/minivenue'
 		itemClassName: 'business item'
 
 		initialize: ->
@@ -34,7 +34,7 @@ define ['models/listen', 'views/item', 'views/search'], (Listen, ItemView, Searc
 
 
 		serialize: -> 
-			if @model then @model.toJSON() else title: ''
+			list: if @model then @model.toJSON() else title: ''
 
 		beforeRender: ->
 			# Iterate over the passed collection and create a view for each item.

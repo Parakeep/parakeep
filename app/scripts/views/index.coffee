@@ -2,25 +2,19 @@ define ['views/list', 'views/item', 'views/new-list', 'models/listen'], (ListVie
 	###
 	The Main Page, shows a list of all public lists.
 	###
-	class IndexView extends Backbone.View
-		template: 'list'
+	class IndexView extends ListView
+		# template: 'list'
 		itemTemplate: 'items/list'
-		itemClassName: 'list'
+		itemClassName: 'item'
 
 		initialize: ->
-			@lists = new Parse.Query(Listen.List).equalTo('private', false).collection()
-			@lists.bind 'all', @render, @
-			@lists.fetch()
+			# query to grab all public lists!
+			# TODO: filter by user's friends
+			@list = new Parse.Query(Listen.List).equalTo('private', false).collection()
+			@list.bind 'all', @render, @
+			@list.fetch()
 
 		serialize: ->
-			title: 'All Public Lists'
-
-		beforeRender: ->
-			@setView '#search', new NewListView()
-			# Iterate over the passed collection and create a view for each item.
-			@lists?.each (model) =>
-				# Pass the sample data to the new SomeItem View.
-				@insertView '#list', new ItemView
-					model: model
-					template: @itemTemplate
-					className: @itemClassName
+			list:
+				title: 'All Public Lists'
+				

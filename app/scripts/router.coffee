@@ -28,10 +28,7 @@ define ['app', 'views/menu', 'views/navbar', 'views/search', 'views/index', 'vie
 
 		index: ->
 			@menu.render()
-			# create an IndexView with empty ListCollection, to be fetched in the view
-			Parakeep.layout.setView('#contents', new IndexView
-				model: new Listen.ListCollection()
-			).render()
+			Parakeep.layout.setView('#contents', new IndexView()).render()
 
 		search: (what, where) ->
 			list = new Listen.ItemCollection()

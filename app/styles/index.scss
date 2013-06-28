@@ -18,7 +18,11 @@
 @import "users";
 
 body {
-	background: rgb(241,242,242);	
+	background: rgb(241,242,242);
+}
+
+form {
+	margin-bottom: 0;
 }
 
 // prevent horizontal scrolling ALWAYS

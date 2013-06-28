@@ -22,3 +22,32 @@
 		&:last-child > * { padding-bottom: 0; } 	// last child has no bottom padding
 	}
 }
+
+// horizontally centers an element using absolute positioning and negative half-width margin trick.
+// don't forget to set top/bottom attribute!
+@mixin absolute-center($width, $height:false) {
+	position: absolute;
+	left: 50%;
+	width: $width;
+	@if($height) {	
+		// if height is given then set that property too
+		height: $height;
+	}
+	margin-left: -($width / 2)
+}
+
+// vertically middle-aligns an element using absolute positioning and negative half-height margin trick.
+// don't forget to set left/right attribute!
+@mixin absolute-middle($width, $height: false) {
+	position: absolute;
+	top: 50%;
+	@if ($height) {
+		// if height is given then set size and use height for positioning
+		@include size($width, $height);
+		margin-top: -($height / 2);
+	} @else {	
+		// otherwise, make it a square
+		@include square($width);
+		margin-top: -($width / 2);
+	}
+}
