@@ -1,19 +1,19 @@
 <form action="" class="form-inline">
 	<ul class="nav nav-tabs">
 		<li class="active arrow" data-name="query">
-			<a href="" id="enter-query"><i class="icon-building"></i> <span></span></a>
+			<a href="" id="enter-query"><i class="icon-building"></i> <span>{{what}}</span></a>
 		</li>
 		<li class="arrow" data-name="near">
-			<a href="" id="enter-near"><i class="icon-map-marker"></i> <span></span></a>
+			<a href="" id="enter-near"><i class="icon-map-marker"></i> <span>{{where}}</span></a>
 		</li>
 		<li class="arrow"  data-name="user">
-			<a href="" id="enter-user"><i class="icon-user"></i> <span></span></a>
+			<a href="" id="enter-user"><i class="icon-user"></i> <span>{{who}}</span></a>
 		</li>
 	</ul>
 	<div class="query-container table-row">
 		<div class="variable">
-			<input type="text" id="query" name="query" placeholder="Find a business or vender..." autofocus>
-			<input type="text" id="near" name="near" class="hide" placeholder="Search near a location...">
+			<input type="text" id="query" name="query" placeholder="Find a business or vender..." autofocus value="{{what}}">
+			<input type="text" id="near" name="near" class="hide" placeholder="Search near a location..." value="{{where}}">
 			<input type="text" id="user" name="user" class="hide" placeholder="Search among your friends...">
 		</div>
 		<div class="fixed">

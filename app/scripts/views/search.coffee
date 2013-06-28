@@ -7,8 +7,11 @@ define ->
 
 		className: 'search'
 
+		serialize: -> @options
+
 		afterRender: ->
-			@$input = @$('#query')
+			if @options.what and @options.where
+				@submit()
 
 		events:
 			'click .nav-tabs a': 'changeTab'
@@ -39,22 +42,26 @@ define ->
 			query = @$('#query').val().trim()
 			near = @$('#near').val().trim()
 			if near
+				# if user provided location string then we're donezo
 				return promise.resolve _.extend @defaultParams, { query: query, near: near }
 			else
+				# if not, we'll have to request their current location
 				navigator.geolocation.getCurrentPosition (position) =>
 					promise.resolve _.extend @defaultParams,
 						query: query
 						ll: "#{position.coords.latitude},#{position.coords.longitude}"
 				, (error) ->
+					# if user rejects the request then prompt them to enter text
 					promise.reject which: 'near'
 
 			return promise.promise()
 
 		submit: (evt) ->
-			evt.preventDefault()
+			evt?.preventDefault()
 			# get query params (and current location if needed)
 			promise = @getQueryParams()
 			promise.done (params) =>
+				Backbone.history.navigate "/search/#{params.query}/#{params.near}"
 				Parse.Cloud.run 'venueSearch', params,
 					success: (response) =>
 						window.response = JSON.parse(response).response

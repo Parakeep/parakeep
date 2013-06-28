@@ -1,12 +1,18 @@
 define ['app', 'views/menu', 'views/navbar', 'views/search', 'views/index', 'views/list', 'views/login', 'models/listen'], 
 (Parakeep, MenuView, NavbarView, SearchView, IndexView, ListView, LoginView, Listen) ->
 	"use strict"
+
+	sanitize = (param) ->
+		if /^\//.test param
+			return param.substr 1
+		return param
 	
 	# Defining the application router, you can attach sub routers here.
 	Router = Backbone.Router.extend
 		routes:
 			'': 'index'
 			'search': 'search'
+			'search(/:what(/:where))': 'search'
 			'list/:id': 'list'
 			'user': 'user'
 			'user/:name': 'user'
@@ -27,11 +33,15 @@ define ['app', 'views/menu', 'views/navbar', 'views/search', 'views/index', 'vie
 				model: new Listen.ListCollection()
 			).render()
 
-		search: ->
+		search: (what, where) ->
 			list = new Listen.ItemCollection()
 			$('#searchbtn').addClass('active')
 			Parakeep.layout.setView('#search', 
-				new SearchView(list: list)).render()
+				new SearchView
+					list: list
+					what: sanitize what
+					where: sanitize where
+				).render()
 			Parakeep.layout.setView('#contents', new ListView(
 				list: list, 
 				itemTemplate: 'items/minivenue'
