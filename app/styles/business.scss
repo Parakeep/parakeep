@@ -1,8 +1,11 @@
-.business {
+.business, .minilist {
 	text-align: left;
+	background: $ltbeige;
 
 	.name {
 		margin-top: 0;
+		font-size: 1.3em;
+		line-height: 1.5em;
 	}
 
 	// on mobile, business lists are shown as full-width list items
@@ -23,7 +26,6 @@
 	// on desktop, lists are shown as pretty business cards
 	@media (min-width: 501px) {
 		display: inline-block;
-		background: #eee;
 		border-radius: 6px;
 		padding: 10px !important;
 		margin: 10px;
@@ -36,19 +38,29 @@
 	}
 }
 
-.minivenue {
+.minivenue, .minilist {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	display: block;
+
+	&:hover { text-decoration: none; }
+
+	i {
+		@include absolute-middle(40px);
+		right: 20px;
+		font-size: 40px;
+		color: $medbeige;
+	}
+
 	.icon { 
-		float: right; 
+		float: left; 
 		margin-top: -2px;
 	}
 	.name {
-		font-weight: bold;
 		display: block;
 	}
-	.address {
+	.address, .tagline {
 		color: #aaa;
 		font-family: $Cassia;
 	}

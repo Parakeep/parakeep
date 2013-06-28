@@ -1,5 +1,4 @@
-#list {
-	margin-top: 20px;
+ul {
 	li {
 		position: relative;
 		
@@ -10,6 +9,23 @@
 		}
 
 		&.item {
+		}
+
+		&:before {
+			content: '+';
+			position: absolute;
+			top: 0;
+			left: 0;
+			@include square(25px);
+			background: $teal;
+			text-align: center;
+			font-size: 30px;
+			line-height: 30px;
+			opacity: 0;
+			@include transition(opacity 0.2s);
+		}
+		&.added:before {
+			opacity: 1;
 		}
 	}
 }

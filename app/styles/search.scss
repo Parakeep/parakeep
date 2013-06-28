@@ -42,24 +42,33 @@
 			}
 		}
 	}
+}
 
-	.query-container {
-		padding: 10px;
-		background: $mint;
+.query-container {
+	padding: 10px;
+	background: $mint;
 
-		input, button {
-			box-sizing: border-box;
-			padding: 0.5em;
-			height: auto;
-		}
+	input, button {
+		box-sizing: border-box;
+		padding: 0.5em;
+		height: auto;
+	}
 
-		input { 
-			width: 100%; 
+	input { 
+		width: 100%; 
+		font-family: $Cassia;
+	}
+	button { 
+		width: 80px; 
+		@include gradientBar(lighten($medblush, 7.5%), $darkblush);
+		&:hover {
+			color: white;
+			background-color: $darkblush;
 		}
-		button { 
-			width: 80px; 
-			@include gradientBar($medblush, $darkblush);
-		}
+	}
+
+	> input:last-child {
+		margin-top: 10px;
 	}
 }
 

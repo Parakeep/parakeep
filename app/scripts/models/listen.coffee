@@ -36,14 +36,10 @@ define ['app'], (app) ->
 		# returns a Listen.ItemCollection configured to fetch items in this list.
 		# all that needs to be done is call fetch() on the collection.
 		items: ->
-			# return cached collection reference if it exists
-			return @_items if @_items
-			# create collection and construct query to fetch list items belong to this list.
-			@_items = new Listen.ItemCollection()
-			@_items.list = @
-			@_items.query = new Parse.Query(Listen.Item)
-			@_items.query.equalTo('list', @).include 'user'
-			@_items
+			# we are creating a relation on the item storing the lists it belongs to.
+			# Parse automatically searches through the relation to find items that belong to
+			# this List. Bitchin'!
+			new Parse.Query(Listen.Item).equalTo('lists', @).include('user').collection()
 
 		# creates a new item in this list, injecting the correct list reference
 		createItem: (options) ->

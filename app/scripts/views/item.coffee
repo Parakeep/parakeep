@@ -1,4 +1,4 @@
-define ->
+define ['app', 'views/choose-list'], (Parakeep, ChooseListView) ->
 	###
 	View for a single item in a list. Be sure to pass template and className to constructor.
 	###
@@ -10,6 +10,7 @@ define ->
 
 		events:
 			'movestart': 'allowScroll'
+			'click #add': 'addToList'
 			'click button': 'menuButton'
 			'swiperight .swipe-menu': 'closeMenu'
 			'swipeleft': 'openMenu'
@@ -19,7 +20,9 @@ define ->
 			@$el.takeClass('menu-open')
 
 		closeMenu: (evt) ->
-			@$el.removeClass('menu-open')
+			if @$el.hasClass('menu-open')
+				@$el.removeClass('menu-open')
+				return false
 
 		menuButton: (evt) ->
 			return false
@@ -30,3 +33,8 @@ define ->
 			if ((e.distX > e.distY and e.distX < -e.distY) or
 			    (e.distX < e.distY and e.distX > -e.distY))
 				e.preventDefault()
+
+		addToList: (e) ->
+			e.preventDefault()
+			Parakeep.layout.setView('#offscreen', 
+				@choose = new ChooseListView(model: @model)).render()

@@ -1,0 +1,29 @@
+<div class="navbar">
+	<div class="navbar-inner">
+		<button id="back" class="btn-nav pull-left"><i class="icon-chevron-left"></i></button>
+		<button id="ok" class="btn-nav pull-right">OK</button>
+		<div class="brand"><a>Add to Lists</a></div>
+	</div>
+</div>
+<form action="" id="newList" class="form-inline">
+	<div class="query-container">
+		<div class="table-row">
+			<div class="variable">
+				<input type="text" id="title" name="title" placeholder="Create a new list...">
+			</div>
+			<div class="fixed">
+				<button type="submit" class="btn"><i class="icon-plus"></i></button>
+			</div>
+		</div>
+		<input type="text" id="tagline" class="hide" name="tagline" placeholder="Now for a witty tagline...">
+	</div>
+</form>
+<ul id="lists" class="unstyled">
+	{{#each lists}}
+		<li data-cid="{{cid}}">
+		{{#with attributes}}
+			{{> list}}
+		{{/with}}
+		</li>
+	{{/each}}
+</ul>
