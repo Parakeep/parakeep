@@ -11,3 +11,4 @@ define ->
 
 		hideMenu: ->
 			$('#layout').removeClass('menu-open')
+			@

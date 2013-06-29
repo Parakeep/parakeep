@@ -27,11 +27,19 @@ define ['app', 'views/menu', 'views/navbar', 'views/search', 'views/index', 'vie
 			Parakeep.layout.setView('#menu',
 				@menu = new MenuView()).render()
 
+		reset: ->
+			@menu.hideMenu().render()
+			@navbar.setTitle()
+			$('#searchbtn').removeClass('active')
+			Parakeep.layout.removeView('#search')
+			Parakeep.layout.removeView('#contents')
+
 		index: ->
-			@menu.render()
+			@reset()
 			Parakeep.layout.setView('#contents', new IndexView()).render()
 
 		search: (what, where) ->
+			@reset()
 			list = new Listen.ItemCollection()
 			$('#searchbtn').addClass('active')
 			Parakeep.layout.setView('#search', 
@@ -46,11 +54,13 @@ define ['app', 'views/menu', 'views/navbar', 'views/search', 'views/index', 'vie
 			)).render()
 
 		list: (listId, title) ->
+			@reset()
 			# lookup the requested list and then make a ListView for it
 			list = new Listen.List
 				id: listId
 			list.fetch
-				success: ->
+				success: =>
+					@navbar.setTitle(list.get('title'))
 					Parakeep.layout.setView('#contents', 
 						new ListView(model: list)).render()
 				error: ->
@@ -63,6 +73,7 @@ define ['app', 'views/menu', 'views/navbar', 'views/search', 'views/index', 'vie
 			@list Parse.User.current().get('favorites').id
 
 		login: ->
+			@reset()
 			Parakeep.layout.setView('#contents', 
 				new LoginView()).render()
 

@@ -13,3 +13,6 @@ define ->
 
 		toggleMenu: ->
 			$('#layout').toggleClass('menu-open')
+
+		setTitle: (title) ->
+			@$('.brand a').text if title then title else 'Parakeep'

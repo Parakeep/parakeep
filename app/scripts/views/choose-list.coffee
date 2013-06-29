@@ -22,6 +22,7 @@ define ['models/listen', 'views/message'], (Listen, MessageView) ->
 
 		afterRender: ->
 			$('#offscreen').addClass('onscreen')
+			@$('#ok').css 'visibility', 'hidden'
 
 		toggleList: (e) ->
 			$(e.currentTarget).toggleClass('added')
@@ -56,7 +57,7 @@ define ['models/listen', 'views/message'], (Listen, MessageView) ->
 			# add those lists to the item's lists relation
 			@model.relation('lists').add(targetLists)
 			# save the F out of it, showing a nice message when done
-			@model.save null,
+			@model.save { user: Parse.User.current() },
 				success: (item) =>
 					message = new MessageView
 						message: 'message-added'

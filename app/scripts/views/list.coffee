@@ -6,6 +6,7 @@ define ['models/listen', 'views/item', 'views/search'], (Listen, ItemView, Searc
 	###
 	class ListView extends Backbone.View
 		template: 'list'
+		className: 'list'
 		itemTemplate: 'items/minivenue'
 		itemClassName: 'business item'
 
@@ -30,7 +31,7 @@ define ['models/listen', 'views/item', 'views/search'], (Listen, ItemView, Searc
 				@list = @options.list
 				
 			# collection event to update UI
-			@list.bind 'all', @render, @
+			@list.bind 'add remove reset', @render, @
 
 
 		serialize: -> 
