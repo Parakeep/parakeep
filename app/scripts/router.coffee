@@ -75,7 +75,6 @@ define ['app', 'views/menu', 'views/navbar', 'views/search', 'views/index', 'vie
 
 		login: ->
 			@reset()
-			Parakeep.layout.setView('#contents', 
 			Parakeep.layout.setView('#contents',
 				new LoginView()).render()
 
