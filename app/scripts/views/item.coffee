@@ -11,6 +11,7 @@ define ['app', 'views/choose-list'], (Parakeep, ChooseListView) ->
 		events:
 			'movestart': 'allowScroll'
 			'click #add': 'addToList'
+			'click #save': 'favorite'
 			'click button': 'menuButton'
 			'swiperight': 'toggleMenu'
 			'swipeleft': 'toggleMenu'
@@ -36,3 +37,13 @@ define ['app', 'views/choose-list'], (Parakeep, ChooseListView) ->
 			e.preventDefault()
 			Parakeep.layout.setView('#offscreen', 
 				@choose = new ChooseListView(model: @model)).render()
+
+		favorite: (e) ->
+			e.preventDefault()
+			if Parse.User.current()
+				@model.relation('lists').add(Parse.User.current().get('favorites'))
+				@model.save null,
+					success: =>
+						@$('#save i').removeClass('icon-heart-empty').addClass('icon-heart')
+			else
+				Backbone.history.navigate 'login', true
