@@ -8,6 +8,26 @@ define ['models/listen'], (Listen) ->
 		fbLogin: (e) ->
 			Parse.FacebookUtils.logIn null,
 				success: (user) ->
+
+					# Parse.User.logIn(username, {
+				 #        success: function(user) {
+				 #          new ManageTodosView();
+				 #          self.undelegateEvents();
+				 #          delete self;
+				 #        },
+
+				 #        error: function(user, error) {
+				 #          console.log 'omg something?'
+				 #        }
+     #  				});
+
+					console.log user
+					FB.api '/me', (d) ->
+						unless user.get('facebook_id')
+							user.save
+								name: d.name
+								facebook_id: d.id
+
 					unless user.get('favorites')
 						console.log 'creating favorites list...'
 						# favorites list, standard properties for all
@@ -27,4 +47,4 @@ define ['models/listen'], (Listen) ->
 
 					Backbone.history.navigate '/', true
 				error: (user, error) ->
-					alert 'user cancelled the F out of this B'
+					alert 'User cancelled the F out of this B, or some other bad ish happened.'
