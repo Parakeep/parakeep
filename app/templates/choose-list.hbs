@@ -9,7 +9,7 @@
 	<div class="query-container">
 		<div class="table-row">
 			<div class="variable">
-				<input type="text" id="title" name="title" placeholder="Create a new list...">
+				<input type="text" id="title" name="title" placeholder="Create a new list..." autocomplete="off">
 			</div>
 			<div class="fixed">
 				<button type="submit" class="btn"><i class="icon-plus"></i></button>
@@ -22,7 +22,7 @@
 	{{#each lists}}
 		<li data-cid="{{cid}}">
 		{{#with attributes}}
-			{{> list}}
+			{{> list-noswipe}}
 		{{/with}}
 		</li>
 	{{/each}}

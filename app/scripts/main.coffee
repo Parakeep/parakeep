@@ -16,6 +16,7 @@ define ["app", "router"], (app, Router) ->
     new Handlebars.SafeString(partial(context))
 
   Handlebars.registerPartial 'list', JST['items/list']
+  Handlebars.registerPartial 'list-noswipe', JST['items/list-noswipe']
 
   # Define your master router on the application namespace and trigger all
   # navigation from this instance.

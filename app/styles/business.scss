@@ -46,11 +46,25 @@
 
 	&:hover { text-decoration: none; }
 
-	i {
+	.icon-chevron-right {
 		@include absolute-middle(40px);
 		right: 20px;
 		font-size: 40px;
 		color: $medbeige;
+	}
+
+	.icon-swipe {
+		$size: 30px;
+		@extend .icon-ellipsis-vertical;
+		font-size: $size;
+		color: $medbeige;
+		position: absolute;
+		top: 50%;
+		height: $size;
+		margin-top: -$size;
+		right: -10px;
+		font-size: $size;
+		padding: ($size / 2) 20px;
 	}
 
 	.icon { 
@@ -64,4 +78,8 @@
 		color: #aaa;
 		font-family: $Cassia;
 	}
+}
+
+.minilist {
+	padding-left: 40px;
 }

@@ -12,18 +12,16 @@ define ['app', 'views/choose-list'], (Parakeep, ChooseListView) ->
 			'movestart': 'allowScroll'
 			'click #add': 'addToList'
 			'click button': 'menuButton'
-			'swiperight .swipe-menu': 'closeMenu'
-			'swipeleft': 'openMenu'
-			'click': 'closeMenu'
+			'swiperight': 'toggleMenu'
+			'swipeleft': 'toggleMenu'
+			'click .icon-swipe': 'toggleMenu'
 
-		openMenu: (evt) ->
-			@$el.takeClass('menu-open')
-
-		closeMenu: (evt) ->
+		toggleMenu: (e) ->
 			if @$el.hasClass('menu-open')
 				@$el.removeClass('menu-open')
-				return false
-
+			else @$el.takeClass('menu-open')
+			return false
+			
 		menuButton: (evt) ->
 			return false
 
